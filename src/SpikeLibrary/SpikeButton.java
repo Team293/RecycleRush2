@@ -18,12 +18,29 @@ public class SpikeButton extends JoystickButton{
 		m_buttonNumber = buttonNumber;
 	}
 	
-	public boolean isToggled() {
+	private void update() {
+		m_previous = m_current;
 		m_current = m_joystick.getRawButton(m_buttonNumber);
+	}
+	
+	public boolean isHeld() {
+		update();
+		return m_current;
+	}
+	
+	public boolean isBumped() {
+		update();
 		if (m_current && !m_previous) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isToggled() {
+		update();
+		if (isBumped()) {
 			m_toggle = !m_toggle;
 		}
-		m_previous = m_current;
 		return m_toggle;
 	}
 	
