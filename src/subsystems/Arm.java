@@ -34,6 +34,10 @@ public class Arm {
 		position = positionInput;
 	}
 	
+	public static int getDestinationPosition() {
+		return position;
+	}
+	
 	public static void goToPosition() {
 		int error = getError(encoder.get(), counts[position]);
 		if(Math.abs(error) > tolerance) {

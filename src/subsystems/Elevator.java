@@ -1,7 +1,5 @@
 package subsystems;
 
-import java.util.ArrayList;
-
 import org.usfirst.frc.team293.robot.Ports;
 
 import edu.wpi.first.wpilibj.Talon;
