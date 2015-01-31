@@ -5,16 +5,14 @@ import java.util.ArrayList;
 import org.usfirst.frc.team293.robot.Ports;
 
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Elevator {
-	public static final Talon elevator = new Talon(Ports.elevator);
-	private static final int position = 0;
-	private static final ArrayList<Integer> positions = new ArrayList<Integer>();
-	Int[] positions;
-	positions = new Int[] {234,2355,2533};
-	
-	String[] auto;
-	auto = new String[]{"asdf","asdfs","asdf"};
+	private static final Talon elevator = new Talon(Ports.elevator);
+	private static final Encoder encoder = new Encoder(Ports.elevatorEncoder1, Ports.elevatorEncoder2);
+	private static int position = 0;
+	static int[] counts = new int[] {234,2355,2533};
+	private static final int tolerance = 128;
 	
 	
 	public static void move(boolean direction) {
@@ -25,8 +23,20 @@ public class Elevator {
 		}
 	}
 	
+	private static int getError(int num, int center) {
+		int error = num - center;
+		return error;
+	}
+	
+	public static void setPosition(int positionInput) {
+		position = positionInput;
+	}
+	
 	public static void goToPosition() {
-		
+		int error = getError(encoder.get(), counts[position]);
+		if(Math.abs(error) > tolerance) {
+			elevator.set(error/tolerance/2);
+		}
 	}
 
 }

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team293.robot;
 
+import subsystems.Elevator;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -30,7 +31,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        
+    	OI.controlDriveTrain();
+    	OI.controlArm();
+    	OI.controlElevator();
+    	OI.controlPDP();
     }
     
     /**
