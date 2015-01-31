@@ -6,31 +6,31 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class SpikeButton extends JoystickButton{
 
 	
-    GenericHID m_joystick;
-    int m_buttonNumber;
-    boolean m_toggle = false;
-    boolean m_previous = false;
-    boolean m_current = false;
+    GenericHID joystick;
+    int buttonNumber;
+    boolean toggle = false;
+    boolean previous = false;
+    boolean current = false;
 
 	public SpikeButton(GenericHID joystick, int buttonNumber) {
 		super(joystick, buttonNumber);
-		m_joystick = joystick;
-		m_buttonNumber = buttonNumber;
+		this.joystick = joystick;
+		this.buttonNumber = buttonNumber;
 	}
 	
 	private void update() {
-		m_previous = m_current;
-		m_current = m_joystick.getRawButton(m_buttonNumber);
+		previous = current;
+		current = joystick.getRawButton(buttonNumber);
 	}
 	
 	public boolean isHeld() {
 		update();
-		return m_current;
+		return current;
 	}
 	
 	public boolean isBumped() {
 		update();
-		if (m_current && !m_previous) {
+		if (current && !previous) {
 			return true;
 		}
 		return false;
@@ -39,9 +39,9 @@ public class SpikeButton extends JoystickButton{
 	public boolean isToggled() {
 		update();
 		if (isBumped()) {
-			m_toggle = !m_toggle;
+			toggle = !toggle;
 		}
-		return m_toggle;
+		return toggle;
 	}
 	
 

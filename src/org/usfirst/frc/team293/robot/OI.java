@@ -21,11 +21,13 @@ public class OI {
 		}
 		
 		if (position0Button.isBumped()) {
+			//TODO: Create this button
 			Arm.setPosition(0);
 			Arm.setMode(false);
 		}
 		
 		if (position1Button.isBumped()) {
+			//TODO: Create this button
 			Arm.setPosition(1);
 			Arm.setMode(false);
 		}

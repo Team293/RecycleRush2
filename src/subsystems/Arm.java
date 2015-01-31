@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class Arm {
 	public static final Talon arm = new Talon(Ports.arm);
-	private static final Encoder encoder = new Encoder(Ports.armEncoder1, Ports.armEncoder2);
+	private static final Encoder encoder = new Encoder(Ports.armEncoder1, Ports.armEncoder2,false, Encoder.EncodingType.k4X);
 	private static boolean manualMode = true;
 	private static int position = 0;
 	static int[] counts = new int[] {234,2355,2533};

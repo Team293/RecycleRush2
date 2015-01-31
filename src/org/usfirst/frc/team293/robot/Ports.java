@@ -17,7 +17,7 @@ public class Ports {
 			
 
 			//gamepad
-			rightYAxis = 5,
+			rightYAxis = 8,
 			A = 1,
 			B = 2,
 			X = 3,
