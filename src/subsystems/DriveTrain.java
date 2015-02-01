@@ -2,17 +2,17 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.VictorSP;
 
 public class DriveTrain {
 	private static final double diameter = 10;
 	private static final double width = 40;
 	
-    private static final Talon leftMotor1 = new Talon(Ports.leftDrive1);
-    private static final Talon rightMotor1 = new Talon(Ports.rightDrive1);
-    private static final Talon leftMotor2 = new Talon(Ports.leftDrive2);
-    private static final Talon rightMotor2 = new Talon(Ports.rightDrive2);
+    private static final VictorSP leftMotor1 = new VictorSP(Ports.leftDrive1);
+    private static final VictorSP rightMotor1 = new VictorSP(Ports.rightDrive1);
+    private static final VictorSP leftMotor2 = new VictorSP(Ports.leftDrive2);
+    private static final VictorSP rightMotor2 = new VictorSP(Ports.rightDrive2);
 
     
     private static final RobotDrive drive = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);

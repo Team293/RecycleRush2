@@ -37,7 +37,6 @@ public class SpikeButton extends JoystickButton{
 	}
 	
 	public boolean isToggled() {
-		update();
 		if (isBumped()) {
 			toggle = !toggle;
 		}
