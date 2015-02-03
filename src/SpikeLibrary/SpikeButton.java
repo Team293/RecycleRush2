@@ -1,18 +1,18 @@
 package SpikeLibrary;
 
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class SpikeButton extends JoystickButton{
 
 	
-    GenericHID joystick;
+    Joystick joystick;
     int buttonNumber;
     boolean toggle = false;
     boolean previous = false;
     boolean current = false;
 
-	public SpikeButton(GenericHID joystick, int buttonNumber) {
+	public SpikeButton(Joystick joystick, int buttonNumber) {
 		super(joystick, buttonNumber);
 		this.joystick = joystick;
 		this.buttonNumber = buttonNumber;

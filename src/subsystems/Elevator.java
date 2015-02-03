@@ -2,12 +2,15 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 
 public class Elevator {
 	private static final VictorSP elevator = new VictorSP(Ports.elevator);
 	private static final Encoder encoder = new Encoder(Ports.elevatorEncoder1, Ports.elevatorEncoder2);
+	private static final DigitalInput topLimit = new DigitalInput(Ports.topLimit);
+	private static final DigitalInput bottomLimit = new DigitalInput(Ports.bottomLimit);
 	private static boolean manualMode = true;
 	private static int position = 0;
 	static int[] counts = new int[] {234,2355,2533};
