@@ -4,14 +4,17 @@ import org.usfirst.frc.team293.robot.Ports;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 public class Arm {
 	public static final Talon arm = new Talon(Ports.arm);
-	private static final Encoder encoder = new Encoder(Ports.armEncoder1, Ports.armEncoder2,false, Encoder.EncodingType.k4X);
+	private static final AnalogPotentiometer pot = new AnalogPotentiometer(Ports.armPot, 2, -1);
+	private static final PIDController pid = new PIDController(0.1, 0.1, 0.1, pot, arm);
 	private static boolean manualMode = true;
-	private static int position = 0;
-	static int[] counts = new int[] {234,2355,2533};
-	private static final int tolerance = 128;
+	private static double position = 0;
+	static double[] positions = new double[] {0,0.25,0.75};
+	private static final double tolerance = 0.02;
 	
 	public static void move(double speed) {
 		arm.set(speed);
@@ -25,24 +28,17 @@ public class Arm {
 		return manualMode;
 	}
 	
-	private static int getError(int num, int center) {
-		int error = num - center;
-		return error;
+	public static void presetPosition(int positionInput) {
+		position = positions[positionInput];
 	}
 	
-	public static void setPosition(int positionInput) {
+	public static void setPosition(double positionInput) {
 		position = positionInput;
 	}
 	
-	public static int getDestinationPosition() {
-		return position;
-	}
-	
 	public static void goToPosition() {
-		int error = getError(encoder.get(), counts[position]);
-		if(Math.abs(error) > tolerance) {
-			move(error/tolerance/2);
-		}
+		pid.setAbsoluteTolerance(tolerance);
+		pid.setSetpoint(position);
 	}
 
 

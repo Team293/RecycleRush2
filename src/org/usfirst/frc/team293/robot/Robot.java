@@ -9,6 +9,7 @@ import autonomous.RobotSet;
 import autonomous.ToteSet;
 import autonomous.ToteStack;
 import subsystems.Elevator;
+import subsystems.PDP;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -71,6 +72,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
+		teleopPeriodic();
 
 	}
 

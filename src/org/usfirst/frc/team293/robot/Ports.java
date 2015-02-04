@@ -8,25 +8,22 @@ public class Ports {
 	rightJoystick = 1,
 	launchpad = 2,
 
-	//buttons & axes
+	//buttons & axises
 
 	//leftjoystick
 
 	//rightjoystick
 
-	//gamepad
-	elevator0BInput = 0,
-	elevator1BInput = 0,
-	elevator2BInput = 0,
-	elevator3BInput = 0,
-	elevator4BInput = 0,
-	elevator5BInput = 0,
-	elevator6BInput = 0,
-	elevatorAxis = 0,
-	arm0B = 0,
-	arm1B = 0,
-	armAxis = 0,
+	//launchpad
+	elevator0BInput = 1,
+	elevator1BInput = 2,
+	elevator2BInput = 3,
+	elevator3BInput = 4,
+	elevator4BInput = 5,
+	elevator5BInput = 6,
+	elevator6BInput = 7,
 
+/*
 	elevator0BOutput = 0,
 	elevator1BOutput = 0,
 	elevator2BOutput = 0,
@@ -34,7 +31,14 @@ public class Ports {
 	elevator4BOutput = 0,
 	elevator5BOutput = 0,
 	elevator6BOutput = 0,
-
+*/
+	
+	elevatorAxis = 1,
+	armAxis = 2,
+	
+	arm0B = 8,
+	arm1B = 9,
+	
 	//digital sensors
 	topLimit = 0,
 	bottomLimit = 0,
@@ -42,8 +46,7 @@ public class Ports {
 	//analog sensors
 	elevatorEncoder1 = 0,
 	elevatorEncoder2 = 0,
-	armEncoder1 = 0,
-	armEncoder2 = 0,
+	armPot = 0,
 	//motors
 	leftDrive1 = 0,
 	leftDrive2 = 0,
