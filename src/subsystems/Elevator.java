@@ -19,7 +19,19 @@ public class Elevator {
 	static int[] positions = new int[] {234,2355,2533};
 	private static final int tolerance = 128;
 
-
+	
+	private class pidElevatorControl implements PIDOutput {
+		public void pidWrite(double output) {
+			if (topLimit.get() && output > 0) {
+				move(0);
+			} else if (bottomLimit.get() && output < 0) {
+				move(0);
+			} else {
+				move(output);
+			}
+		}
+	}
+	
 	public static void move(double speed) {
 		elevator.set(speed);
 	}
@@ -30,11 +42,6 @@ public class Elevator {
 
 	public static boolean getMode() {
 		return manualMode;
-	}
-
-	private static int getError(int num, int center) {
-		int error = num - center;
-		return error;
 	}
 
 	public static void presetPosition(int positionInput) {

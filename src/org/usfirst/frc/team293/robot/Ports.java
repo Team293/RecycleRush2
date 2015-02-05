@@ -23,7 +23,7 @@ public class Ports {
 	elevator5BInput = 6,
 	elevator6BInput = 7,
 
-/*
+	/*//LEDs
 	elevator0BOutput = 0,
 	elevator1BOutput = 0,
 	elevator2BOutput = 0,
@@ -31,31 +31,30 @@ public class Ports {
 	elevator4BOutput = 0,
 	elevator5BOutput = 0,
 	elevator6BOutput = 0,
-*/
-	
+	 */
+
 	elevatorAxis = 1,
 	armAxis = 2,
-	
+
 	arm0B = 8,
 	arm1B = 9,
 	
 	//digital sensors
 	topLimit = 0,
 	bottomLimit = 0,
-
-	//analog sensors
+	
+	//Digital Encoders
 	elevatorEncoder1 = 0,
 	elevatorEncoder2 = 0,
-	armPot = 0,
-	//motors
-	leftDrive1 = 0,
-	leftDrive2 = 0,
-	rightDrive1 = 0,
-	rightDrive2 = 0,
-	elevator = 0,
-	arm = 0,
 
-	//solonoids
-	door1 = 0,
-	door2 = 0;
+	//analog sensors
+	armPot = 0,
+	
+	//motors
+	leftDrive = 0,
+	rightDrive = 0,
+	elevator = 0,
+	arm = 0;
+
+
 }

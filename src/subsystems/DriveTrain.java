@@ -9,13 +9,11 @@ public class DriveTrain {
 	private static final double diameter = 10;
 	private static final double width = 40;
 	
-    private static final VictorSP leftMotor1 = new VictorSP(Ports.leftDrive1);
-    private static final VictorSP rightMotor1 = new VictorSP(Ports.rightDrive1);
-    private static final VictorSP leftMotor2 = new VictorSP(Ports.leftDrive2);
-    private static final VictorSP rightMotor2 = new VictorSP(Ports.rightDrive2);
+    private static final VictorSP leftMotor = new VictorSP(Ports.leftDrive);
+    private static final VictorSP rightMotor = new VictorSP(Ports.rightDrive);
 
     
-    private static final RobotDrive drive = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
+    private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
 	
 
  
