@@ -39,22 +39,26 @@ public class Ports {
 	arm0B = 8,
 	arm1B = 9,
 	
-	//digital sensors
-	topLimit = 0,
-	bottomLimit = 0,
+	//Digital Input
+	leftDriveEncoder1 = 0,
+	leftDriveEncoder2 = 1,
+	rightDriveEncoder1 = 2,
+	rightDriveEncoder2 = 3,
+	elevatorEncoder1 = 4,
+	elevatorEncoder2 = 5,
+	topLimit = 6,
+	bottomLimit = 7,
 	
-	//Digital Encoders
-	elevatorEncoder1 = 0,
-	elevatorEncoder2 = 0,
 
 	//analog sensors
-	armPot = 0,
+	armPot = 1,
+	gyro = 0,
 	
 	//motors
-	leftDrive = 0,
+	leftDrive = 1,
 	rightDrive = 0,
-	elevator = 0,
-	arm = 0;
+	elevator = 2,
+	arm = 3;
 
 
 }
