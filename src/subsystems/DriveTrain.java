@@ -2,6 +2,8 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -11,11 +13,12 @@ public class DriveTrain {
 	
     private static final VictorSP leftMotor = new VictorSP(Ports.leftDrive);
     private static final VictorSP rightMotor = new VictorSP(Ports.rightDrive);
-
     
     private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
-	
 
+    private static final Gyro gyro = new Gyro(Ports.gyro);
+    private static final Encoder leftEncoder = new Encoder(Ports.leftDriveEncoder1, Ports.leftDriveEncoder2);
+    private static final Encoder rightEncoder = new Encoder(Ports.rightDriveEncoder1, Ports.rightDriveEncoder2);
  
 	public static void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
