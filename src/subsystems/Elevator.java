@@ -19,17 +19,26 @@ public class Elevator {
 	private static double lockSpeed = 0;
 	static int[] positions = new int[] {234,2355,2533};
 	private static final int tolerance = 128;
-	
+	private static final double kP = 5;
+	private static final double encoderScale = 500;
+	private static final double maxSpeed = 1;
+	private static final double minSpeed = -1;
+
 	public static void init() {
 		encoder.reset();
 	}
-	
+
 	public static void lock() {
 		lockSpeed -= encoder.getRate();
 		move(lockSpeed);
 	}
 
 	public static void move(double speed) {
+		if (topLimit.get()) {
+			speed = cap(speed, -1, 0);
+		} else if(bottomLimit.get()) {
+			speed = cap(speed, 0, 1);
+		}
 		elevator.set(speed);
 	}
 
@@ -45,17 +54,19 @@ public class Elevator {
 		position = positions[positionInput];
 	}
 
-	public static void goToPosition() {//not being used
-		double speed = Math.signum(position - encoder.get());
-		if (Math.abs(position - encoder.get()) < tolerance) {
-			speed = 0;
+	private static double cap(double value, double min, double max) {
+		if (value > max) {
+			value = max;
+		} else if (value < min) {
+			value = min;
 		}
-		if (topLimit.get() && speed > 1) {
-			speed = 0;
-		} else if (bottomLimit.get() && speed < 1) {
-			speed = 0;
-		}
-
-		move(speed);
+		return value;
+	}
+	public static void pControl() {
+		double inputValue = encoder.get()/encoderScale;
+		double rawError=position-inputValue;
+		double output = -rawError*kP;
+		output = cap(output, minSpeed, maxSpeed);
+		move(output);
 	}
 }
