@@ -8,6 +8,7 @@ import autonomous.BinToteStack;
 import autonomous.RobotSet;
 import autonomous.ToteSet;
 import autonomous.ToteStack;
+import subsystems.DriveTrain;
 import subsystems.Elevator;
 import subsystems.PDP;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -41,10 +42,18 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("tote stack", new ToteStack());
 
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
+		
+		DriveTrain.init();
+		Elevator.init();
+
+    	//SmartDashboard.putNumber("DriveP", 0.5);
+    	//SmartDashboard.putNumber("DriveI", 0);
+    	//SmartDashboard.putNumber("DriveD", 0);
 	}
 
 	public void autonomousInit() {
 		selectedAuto = (Auto) autonomousChooser.getSelected();
+		DriveTrain.init();
 		selectedAuto.init();
 	}
 
@@ -52,10 +61,8 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		if (Auto.autoTimer.get() < 15) {
-			SmartDashboard.putNumber("time", Auto.autoTimer.get());
-			selectedAuto.run();	
-		}
+			//SmartDashboard.putNumber("time", Auto.autoTimer.get());
+			selectedAuto.run();
 	}
 
 	/**
@@ -63,16 +70,17 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		OI.controlDriveTrain();
-		OI.controlArm();
-		OI.controlElevator();
-		OI.controlPDP();
+		/*OI.controlArm();
+		OI.controlElevator();*/
+		//OI.controlPDP();
+		Elevator.pidEnable();
+		
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
-		teleopPeriodic();
 
 	}
 

@@ -55,8 +55,8 @@ public class Ports {
 	gyro = 0,
 	
 	//motors
-	leftDrive = 1,
-	rightDrive = 0,
+	leftDrive = 0,
+	rightDrive = 1,
 	elevator = 2,
 	arm = 3;
 

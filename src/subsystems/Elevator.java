@@ -4,7 +4,10 @@ import org.usfirst.frc.team293.robot.Ports;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator {
 	private static final VictorSP elevator = new VictorSP(Ports.elevator);
@@ -13,9 +16,19 @@ public class Elevator {
 	private static final DigitalInput bottomLimit = new DigitalInput(Ports.bottomLimit);
 	private static boolean manualMode = true;
 	private static int position = 0;
+	private static double lockSpeed = 0;
 	static int[] positions = new int[] {234,2355,2533};
 	private static final int tolerance = 128;
 	
+	public static void init() {
+		encoder.reset();
+	}
+	
+	public static void lock() {
+		lockSpeed -= encoder.getRate();
+		move(lockSpeed);
+	}
+
 	public static void move(double speed) {
 		elevator.set(speed);
 	}
@@ -32,7 +45,7 @@ public class Elevator {
 		position = positions[positionInput];
 	}
 
-	public static void goToPosition() {
+	public static void goToPosition() {//not being used
 		double speed = Math.signum(position - encoder.get());
 		if (Math.abs(position - encoder.get()) < tolerance) {
 			speed = 0;
@@ -42,7 +55,7 @@ public class Elevator {
 		} else if (bottomLimit.get() && speed < 1) {
 			speed = 0;
 		}
-		
+
 		move(speed);
 	}
 }

@@ -12,9 +12,12 @@ public class RobotSet extends Auto {
 	}
 	
 	public void run() {
-		if (autoTimer.get() < driveToAutozoneTime) {
-			DriveTrain.tankDrive(1, 1);
-		}
+		/*DriveTrain.setPIDSpeed(0);
+		DriveTrain.setPIDDirection(0.5);
+		DriveTrain.pidEnable(true);*/
+		//Elevator.viewEncoder();
+/*		if (autoTimer.get() < driveToAutozoneTime) {
+			DriveTrain.pidEnable(true);
+		}*/
 	}
-
 }
