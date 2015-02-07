@@ -95,7 +95,7 @@ public class OI {
 			} 
 
 			if (!Elevator.getMode()) {
-				Elevator.goToPosition();
+				Elevator.pControl();
 			}
 		}
 	}

@@ -15,17 +15,19 @@ public class Elevator {
 	private static final DigitalInput topLimit = new DigitalInput(Ports.topLimit);
 	private static final DigitalInput bottomLimit = new DigitalInput(Ports.bottomLimit);
 	private static boolean manualMode = true;
-	private static int position = 0;
+	private static double position = 0;
 	private static double lockSpeed = 0;
 	static int[] positions = new int[] {234,2355,2533};
 	private static final int tolerance = 128;
-	private static final double kP = 5;
+	private static double kP = 5;
 	private static final double encoderScale = 500;
 	private static final double maxSpeed = 1;
 	private static final double minSpeed = -1;
 
 	public static void init() {
 		encoder.reset();
+		SmartDashboard.putNumber("kP", kP);
+		SmartDashboard.putNumber("position", position);
 	}
 
 	public static void lock() {
@@ -63,6 +65,8 @@ public class Elevator {
 		return value;
 	}
 	public static void pControl() {
+		kP = SmartDashboard.getNumber("kP");
+		position = SmartDashboard.getNumber("position");
 		double inputValue = encoder.get()/encoderScale;
 		double rawError=position-inputValue;
 		double output = -rawError*kP;

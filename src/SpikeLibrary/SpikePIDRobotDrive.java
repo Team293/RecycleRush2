@@ -22,6 +22,8 @@ public class SpikePIDRobotDrive{
 		public void rotateDrive(double speed, double rotate) {
 			double leftSpeed = speed + rotate;
 			double rightSpeed = speed - rotate;
+			SmartDashboard.putNumber("leftSpeed", leftSpeed);
+			SmartDashboard.putNumber("rightSpeed", rightSpeed);
 			robotDrive.tankDrive(leftSpeed, rightSpeed);
 		}
 	}
@@ -61,7 +63,6 @@ public class SpikePIDRobotDrive{
 		pidController.setOutputRange(-1, 1);
 		pidController.setAbsoluteTolerance(0.03);
 		pidController.setContinuous();
-
 	}
 
 	public void enable(boolean state) {
@@ -85,6 +86,9 @@ public class SpikePIDRobotDrive{
 		pidController.setSetpoint(direction);
 	}
 
+	public double getOutput() {
+		return pidController.get();
+	}
 	public void setSpeed(double speedInput) {
 		speed = speedInput;
 	}

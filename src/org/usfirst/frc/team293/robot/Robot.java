@@ -44,11 +44,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 		
 		DriveTrain.init();
-		Elevator.init();
+		//Elevator.init();
 
-    	//SmartDashboard.putNumber("DriveP", 0.5);
-    	//SmartDashboard.putNumber("DriveI", 0);
-    	//SmartDashboard.putNumber("DriveD", 0);
+    	SmartDashboard.putNumber("DriveP", 0.3);
+    	SmartDashboard.putNumber("DriveI", .01);
+    	SmartDashboard.putNumber("DriveD", 0);
 	}
 
 	public void autonomousInit() {
@@ -69,11 +69,10 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		OI.controlDriveTrain();
+		//OI.controlDriveTrain();
 		/*OI.controlArm();
 		OI.controlElevator();*/
 		//OI.controlPDP();
-		Elevator.pidEnable();
 		
 	}
 

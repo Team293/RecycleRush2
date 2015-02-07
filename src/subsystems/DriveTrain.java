@@ -33,6 +33,7 @@ public class DriveTrain {
 	}
 	
 	public static void pidEnable(boolean state) {
+		SmartDashboard.putNumber("pidOutput", pidDrive.getOutput());
 		pidDrive.enable(state);
 	}
 	
