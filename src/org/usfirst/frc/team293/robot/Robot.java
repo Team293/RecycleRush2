@@ -45,7 +45,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 		
 		DriveTrain.init();
+		//Elevator.init();
 		Elevator.init();
+    	//SmartDashboard.putNumber("DriveP", 0.5);
+    	//SmartDashboard.putNumber("DriveI", 0);
+    	//SmartDashboard.putNumber("DriveD", 0);
 	}
 
 	public void autonomousInit() {
@@ -68,9 +72,11 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		OI.controlDriveTrain();
-		OI.controlArm();
-		OI.controlElevator();
-		OI.controlPDP();
+		/*OI.controlArm();
+		OI.controlElevator();*/
+		//OI.controlPDP();
+		Elevator.settosetpoint();
+		PDP.monitor();
 		
 	}
 
