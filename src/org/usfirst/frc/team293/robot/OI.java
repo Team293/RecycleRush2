@@ -66,40 +66,6 @@ public class OI {
 		}
 	}
 
-	public static void controlElevator() {
-		if (launchpad.getRawAxis(Ports.elevatorAxis) != 0) {
-			Elevator.setMode(true);
-			Elevator.move(launchpad.getRawAxis(Ports.elevatorAxis));
-		} else {
-			if (elevator0B.isBumped()) {
-				Elevator.presetPosition(0);
-				Elevator.setMode(false);
-			} else if (elevator1B.isBumped()) {
-				Elevator.presetPosition(1);
-				Elevator.setMode(false);
-			} else if (elevator2B.isBumped()) {
-				Elevator.presetPosition(2);
-				Elevator.setMode(false);
-			} else if (elevator3B.isBumped()) {
-				Elevator.presetPosition(3);
-				Elevator.setMode(false);
-			} else if (elevator4B.isBumped()) {
-				Elevator.presetPosition(4);
-				Elevator.setMode(false);
-			} else if (elevator5B.isBumped()) {
-				Elevator.presetPosition(5);
-				Elevator.setMode(false);
-			} else if (elevator6B.isBumped()) {
-				Elevator.presetPosition(6);
-				Elevator.setMode(false);
-			} 
-
-			if (!Elevator.getMode()) {
-				Elevator.goToPosition();
-			}
-		}
-	}
-
 	public static void controlPDP() {
 		PDP.monitor();
 	}

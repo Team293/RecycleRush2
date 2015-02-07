@@ -10,6 +10,7 @@ import autonomous.ToteSet;
 import autonomous.ToteStack;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
+import subsystems.Elevator;
 import subsystems.PDP;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -44,8 +45,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 		
 		DriveTrain.init();
+		//Elevator.init();
 		Elevator.init();
-
     	//SmartDashboard.putNumber("DriveP", 0.5);
     	//SmartDashboard.putNumber("DriveI", 0);
     	//SmartDashboard.putNumber("DriveD", 0);
@@ -55,6 +56,7 @@ public class Robot extends IterativeRobot {
 		selectedAuto = (Auto) autonomousChooser.getSelected();
 		DriveTrain.init();
 		selectedAuto.init();
+		
 	}
 
 	/**
@@ -73,7 +75,8 @@ public class Robot extends IterativeRobot {
 		/*OI.controlArm();
 		OI.controlElevator();*/
 		//OI.controlPDP();
-		Elevator.pidEnable();
+		Elevator.settosetpoint();
+		PDP.monitor();
 		
 	}
 
