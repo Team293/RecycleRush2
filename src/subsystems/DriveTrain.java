@@ -19,7 +19,7 @@ public class DriveTrain {
     private static final Talon rightMotor = new Talon(Ports.rightDrive);
     
     private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
-    private static final SpikePIDRobotDrive pidDrive = new SpikePIDRobotDrive(2, 0, 0, Ports.gyro, drive);
+    private static final SpikePIDRobotDrive pidDrive = new SpikePIDRobotDrive(0.5, 0, 0.05, Ports.gyro, drive);
  
     public static void init() {
     	pidDrive.reset();
@@ -33,6 +33,7 @@ public class DriveTrain {
 	}
 	
 	public static void pidEnable(boolean state) {
+		SmartDashboard.putNumber("pidOutput", pidDrive.getOutput());
 		pidDrive.enable(state);
 	}
 	
