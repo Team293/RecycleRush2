@@ -46,8 +46,8 @@ public class Robot extends IterativeRobot {
 		DriveTrain.init();
 		//Elevator.init();
 
-    	SmartDashboard.putNumber("DriveP", 0.3);
-    	SmartDashboard.putNumber("DriveI", .01);
+    	SmartDashboard.putNumber("DriveP", 2);
+    	SmartDashboard.putNumber("DriveI", 0);
     	SmartDashboard.putNumber("DriveD", 0);
 	}
 
