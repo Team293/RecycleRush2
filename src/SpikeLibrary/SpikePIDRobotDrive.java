@@ -21,6 +21,8 @@ public class SpikePIDRobotDrive{
 		}
 		public void pidWrite(double output) {
 			SmartDashboard.putNumber("pidOutput", output);
+			SmartDashboard.putNumber("leftSpeed", speed + output);
+			SmartDashboard.putNumber("leftSpeed", speed - output);
 			m_robotDrive.tankDrive(speed + output, speed - output);
 		}
 	}
