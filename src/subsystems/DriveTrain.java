@@ -25,7 +25,7 @@ public class DriveTrain {
     	pidDrive.reset();
     }
 	public static void tankDrive(double leftSpeed, double rightSpeed) {
-		drive.tankDrive(leftSpeed, rightSpeed);
+		drive.tankDrive(-leftSpeed, -rightSpeed);
 	}
 	
 	public static void arcadeDrive(double move, double rotate) {

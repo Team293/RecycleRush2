@@ -16,6 +16,8 @@ public class OI {
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
 	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick);
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
+	private static final SpikeButton elevatorDownB = new SpikeButton(leftJoystick, 1);
+	private static final SpikeButton elevatorUpB = new SpikeButton(rightJoystick, 1);
 
 	/*	private static final SpikeLEDButton elevator0B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	private static final SpikeLEDButton elevator1B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
@@ -27,6 +29,8 @@ public class OI {
 	private static final SpikeLEDButton elevator7B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	 */	
 
+	//private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
+	//private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
 	private static final SpikeButton elevator0B = new SpikeButton(launchpad, Ports.elevator0BInput);
 	private static final SpikeButton elevator1B = new SpikeButton(launchpad, Ports.elevator1BInput);
 	private static final SpikeButton elevator2B = new SpikeButton(launchpad, Ports.elevator2BInput);
@@ -67,9 +71,13 @@ public class OI {
 	}
 
 	public static void controlElevator() {
-		if (launchpad.getRawAxis(Ports.elevatorAxis) != 0) {
-			Elevator.setMode(true);
-			Elevator.move(launchpad.getRawAxis(Ports.elevatorAxis));
+		if (elevatorUpB.isHeld() || elevatorDownB.isHeld()) {
+			Arm.setMode(true);
+			if (elevatorUpB.isHeld()) {
+				Elevator.manualPosition(true);
+			} else if(elevatorDownB.isHeld()) {
+				Elevator.manualPosition(false);
+			}
 		} else {
 			if (elevator0B.isBumped()) {
 				Elevator.presetPosition(0);
@@ -92,12 +100,9 @@ public class OI {
 			} else if (elevator6B.isBumped()) {
 				Elevator.presetPosition(6);
 				Elevator.setMode(false);
-			} 
-
-			if (!Elevator.getMode()) {
-				Elevator.pControl();
 			}
 		}
+		Elevator.pControl();
 	}
 
 	public static void controlPDP() {

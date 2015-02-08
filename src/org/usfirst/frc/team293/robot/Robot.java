@@ -43,17 +43,18 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 		
-		DriveTrain.init();
+		//DriveTrain.init();
 		//Elevator.init();
 
     	SmartDashboard.putNumber("DriveP", 0.3);
     	SmartDashboard.putNumber("DriveI", .01);
     	SmartDashboard.putNumber("DriveD", 0);
+    	Elevator.init();
 	}
 
 	public void autonomousInit() {
 		selectedAuto = (Auto) autonomousChooser.getSelected();
-		DriveTrain.init();
+		//DriveTrain.init();
 		selectedAuto.init();
 	}
 
@@ -68,10 +69,13 @@ public class Robot extends IterativeRobot {
 	/**
 	 * This function is called periodically during operator control
 	 */
+	public void teleopInit() {
+		Elevator.init();
+	}
 	public void teleopPeriodic() {
-		//OI.controlDriveTrain();
-		/*OI.controlArm();
-		OI.controlElevator();*/
+		OI.controlDriveTrain();
+		OI.controlElevator();
+		//OI.controlArm();
 		//OI.controlPDP();
 		
 	}

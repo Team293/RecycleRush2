@@ -15,6 +15,8 @@ public class Ports {
 	//rightjoystick
 
 	//launchpad
+	elevatorUpB = 1,
+	elevatorDownB = 1,
 	elevator0BInput = 1,
 	elevator1BInput = 2,
 	elevator2BInput = 3,
