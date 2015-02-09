@@ -55,9 +55,9 @@ public class Elevator {
 	public static void manualPosition(boolean direction) {
 		//change the target position manually
 		if (direction) {
-			position += 0.03;
+			position += 0.005;
 		} else {
-			position -= 0.04;
+			position -= 0.004;
 		}
 	}
 	

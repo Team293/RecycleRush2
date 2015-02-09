@@ -12,7 +12,9 @@ public class SpikePIDRobotDrive{
 	private RobotDrivePIDOutput robotDrivePIDOutput;
 	private PIDGyro gyro;
 	private PIDController pidController;
-	
+	private double iterativeSetpoint = 0;
+	private double finalSetpoint = 0;
+
 	private class RobotDrivePIDOutput implements PIDOutput {
 		RobotDrive m_robotDrive;
 
@@ -21,6 +23,10 @@ public class SpikePIDRobotDrive{
 		}
 		public void pidWrite(double output) {
 			SmartDashboard.putNumber("pidOutput", output);
+			if (Math.abs(iterativeSetpoint - finalSetpoint) < 0.0025) {
+				iterativeSetpoint += 0.005;
+			}
+			pidController.setSetpoint(iterativeSetpoint);
 			m_robotDrive.tankDrive(speed + output, speed - output);
 		}
 	}
@@ -68,7 +74,8 @@ public class SpikePIDRobotDrive{
 	}
 
 	public void setDirection(double direction) {
-		pidController.setSetpoint(direction);
+		finalSetpoint = direction;
+		iterativeSetpoint = gyro.pidGet();
 	}
 
 	public double getOutput() {

@@ -50,8 +50,6 @@ public class Ports {
 	elevatorEncoder2 = 5,
 	elevatorTopLimit = 6,
 	elevatorBottomLimit = 7,
-	armTopLimit = 0,
-	armBottomLimit = 0,
 	
 
 	//analog sensors
