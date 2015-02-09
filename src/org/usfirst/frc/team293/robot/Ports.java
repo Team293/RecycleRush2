@@ -48,8 +48,10 @@ public class Ports {
 	rightDriveEncoder2 = 3,
 	elevatorEncoder1 = 4,
 	elevatorEncoder2 = 5,
-	topLimit = 6,
-	bottomLimit = 7,
+	elevatorTopLimit = 6,
+	elevatorBottomLimit = 7,
+	armTopLimit = 0,
+	armBottomLimit = 0,
 	
 
 	//analog sensors

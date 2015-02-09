@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator {
 	private static final VictorSP elevator = new VictorSP(Ports.elevator);
 	private static final Encoder encoder = new Encoder(Ports.elevatorEncoder1, Ports.elevatorEncoder2);
-	private static final DigitalInput topLimit = new DigitalInput(Ports.topLimit);
-	private static final DigitalInput bottomLimit = new DigitalInput(Ports.bottomLimit);
+	private static final DigitalInput topLimit = new DigitalInput(Ports.elevatorTopLimit);
+	private static final DigitalInput bottomLimit = new DigitalInput(Ports.elevatorBottomLimit);
 	private static boolean manualMode = true;
 	private static double position = 0;
 	static int[] positions = new int[] {234,2355,2533};
@@ -25,12 +25,7 @@ public class Elevator {
 	public static void init() {
 		encoder.reset();
 		position = 0;
-		SmartDashboard.putNumber("kP", kP);
-		SmartDashboard.putNumber("position", position);
 	}
-
-
-
 
 	public static void move(double speed) {
 		//stops from moving through limits
@@ -75,7 +70,7 @@ public class Elevator {
 	public static void pControl() {
 		//go to the target position
 		double currentPosition = getInches();
-		SmartDashboard.putNumber("elevatorEncoder", currentPosition);
+		SmartDashboard.putNumber("currentPosition", currentPosition);
 		SmartDashboard.putNumber("targetPosition", position);
 		double rawError = position-currentPosition;
 		double output = rawError*kP;
