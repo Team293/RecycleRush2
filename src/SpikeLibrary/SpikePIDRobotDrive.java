@@ -13,30 +13,15 @@ public class SpikePIDRobotDrive{
 	private PIDGyro gyro;
 	private PIDController pidController;
 	
-	private class SpikeRobotDrive {
-		private RobotDrive robotDrive;
-		public SpikeRobotDrive(RobotDrive robotDriveInput) {
-			robotDrive = robotDriveInput;
-		}
-		
-		public void rotateDrive(double speed, double rotate) {
-			double leftSpeed = speed + rotate;
-			double rightSpeed = speed - rotate;
-			SmartDashboard.putNumber("leftSpeed", leftSpeed);
-			SmartDashboard.putNumber("rightSpeed", rightSpeed);
-			robotDrive.tankDrive(leftSpeed, rightSpeed);
-		}
-	}
-
 	private class RobotDrivePIDOutput implements PIDOutput {
-		SpikeRobotDrive m_robotDrive;
+		RobotDrive m_robotDrive;
 
 		public RobotDrivePIDOutput(RobotDrive robotDrive) {
-			m_robotDrive = new SpikeRobotDrive(robotDrive);
+			m_robotDrive = robotDrive;
 		}
 		public void pidWrite(double output) {
 			SmartDashboard.putNumber("pidOutput", output);
-			m_robotDrive.rotateDrive(speed, output);
+			m_robotDrive.tankDrive(speed + output, speed - output);
 		}
 	}
 
