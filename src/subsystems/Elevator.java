@@ -2,6 +2,7 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
+import SpikeLibrary.SpikeMath;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
@@ -17,8 +18,9 @@ public class Elevator {
 	private static boolean manualMode = true;
 	private static double position = 0;
 	static int[] positions = new int[] {234,2355,2533};
-	private static double kP = 5;
-	private static final double encoderScale = 512;
+	private static double kP = 0.68;
+	private static final double encoderScale = 512; //counts per rotation
+	private static final double circumference = 7.4; //of belt gear
 
 	public static void init() {
 		encoder.reset();
@@ -31,34 +33,53 @@ public class Elevator {
 
 
 	public static void move(double speed) {
+		//stops from moving through limits
+		if (topLimit.get()) {
+			speed = SpikeMath.cap(speed, 0, 1);
+		} else if (bottomLimit.get()) {
+			speed = SpikeMath.cap(speed, -1, 0);
+		}
 		elevator.set(speed);
 	}
+	
 	public static void setMode(boolean newMode) {
+		//sets whether is controlled manually or through preset positions
 		manualMode = newMode;
 	}
 
 	public static boolean getMode() {
+		//returns whether is controlled manually or through preset positions
 		return manualMode;
 	}
 
 	public static void presetPosition(int positionInput) {
+		//set the target position to a preset position
 		position = positions[positionInput];
 	}
 	
 	public static void manualPosition(boolean direction) {
+		//change the target position manually
 		if (direction) {
 			position += 0.03;
 		} else {
 			position -= 0.04;
 		}
 	}
+	
+	public static double getInches() {
+		double rotations = encoder.get()/encoderScale;
+		double inches = rotations * circumference;
+		return -inches;
+	}
+	
 	public static void pControl() {
-		double encoderValue = encoder.get()/encoderScale;
-		SmartDashboard.putNumber("elevatorEncoder", encoderValue);
+		//go to the target position
+		double currentPosition = getInches();
+		SmartDashboard.putNumber("elevatorEncoder", currentPosition);
 		SmartDashboard.putNumber("targetPosition", position);
-		double rawError=position-encoderValue;
-		double output = -rawError*kP;
-		elevator.set(output);
+		double rawError = position-currentPosition;
+		double output = rawError*kP;
+		move(output);
 		SmartDashboard.putNumber("elevatorOutput", output);
 	}
 }
