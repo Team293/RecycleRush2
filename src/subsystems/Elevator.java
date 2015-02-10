@@ -16,7 +16,7 @@ public class Elevator {
 	private static boolean manualMode = true;
 	private static double targetPosition = 0;
 	static int[] positions = new int[] {234,2355,2533};
-	private static double kP = 0.68;
+	private static double kP = 7;
 	private static final double encoderScale = 512; //counts per rotation
 	private static final double circumference = 7.4; //of belt gear
 
@@ -54,9 +54,9 @@ public class Elevator {
 	public static void updateManualPosition(boolean direction) {
 		//change the target position manually
 		if (direction) {
-			targetPosition += 0.005;
+			targetPosition += 0.01;
 		} else {
-			targetPosition -= 0.004;
+			targetPosition -= 0.01;
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class Elevator {
 		SmartDashboard.putNumber("targetPosition", targetPosition);
 		double rawError = targetPosition-currentPosition;
 		double output = rawError*kP;
-		move(output);
+		elevator.set(output);
 		SmartDashboard.putNumber("elevatorOutput", output);
 	}
 }
