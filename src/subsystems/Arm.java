@@ -3,7 +3,6 @@ package subsystems;
 import org.usfirst.frc.team293.robot.Ports;
 
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
