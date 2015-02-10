@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("DriveP", 0.3);
     	SmartDashboard.putNumber("DriveI", .01);
     	SmartDashboard.putNumber("DriveD", 0);
-    	Elevator.init();
+    	Elevator.reset();
 	}
 
 	public void autonomousInit() {
@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopInit() {
-		Elevator.init();
+		Elevator.reset();
 	}
 	public void teleopPeriodic() {
 		OI.controlDriveTrain();

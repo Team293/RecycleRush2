@@ -38,6 +38,7 @@ public class Ports {
 	elevatorAxis = 1,
 	armAxis = 2,
 
+	armManualSwitch = 0,
 	arm0B = 8,
 	arm1B = 9,
 	

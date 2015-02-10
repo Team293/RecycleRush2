@@ -22,7 +22,7 @@ public class Elevator {
 	private static final double encoderScale = 512; //counts per rotation
 	private static final double circumference = 7.4; //of belt gear
 
-	public static void init() {
+	public static void reset() {
 		encoder.reset();
 		position = 0;
 	}
@@ -32,27 +32,28 @@ public class Elevator {
 		if (topLimit.get()) {
 			speed = SpikeMath.cap(speed, 0, 1);
 		} else if (bottomLimit.get()) {
+			reset();
 			speed = SpikeMath.cap(speed, -1, 0);
 		}
 		elevator.set(speed);
 	}
 	
-	public static void setMode(boolean newMode) {
+	public static void setManualMode(boolean newMode) {
 		//sets whether is controlled manually or through preset positions
 		manualMode = newMode;
 	}
 
-	public static boolean getMode() {
+	public static boolean getManualMode() {
 		//returns whether is controlled manually or through preset positions
 		return manualMode;
 	}
 
-	public static void presetPosition(int positionInput) {
+	public static void setPresetPosition(int positionInput) {
 		//set the target position to a preset position
 		position = positions[positionInput];
 	}
 	
-	public static void manualPosition(boolean direction) {
+	public static void updateManualPosition(boolean direction) {
 		//change the target position manually
 		if (direction) {
 			position += 0.005;
@@ -67,7 +68,7 @@ public class Elevator {
 		return -inches;
 	}
 	
-	public static void pControl() {
+	public static void periodicPControl() {
 		//go to the target position
 		double currentPosition = getInches();
 		SmartDashboard.putNumber("currentPosition", currentPosition);

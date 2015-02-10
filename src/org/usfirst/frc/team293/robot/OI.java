@@ -39,6 +39,7 @@ public class OI {
 	private static final SpikeButton elevator5B = new SpikeButton(launchpad, Ports.elevator5BInput);
 	private static final SpikeButton elevator6B = new SpikeButton(launchpad, Ports.elevator6BInput);
 
+	private static final SpikeButton armManualSwitch = new SpikeButton(launchpad, Ports.armManualSwitch);
 	private static final SpikeButton arm0B = new SpikeButton(launchpad, Ports.arm0B);
 	private static final SpikeButton arm1B = new SpikeButton(launchpad, Ports.arm1B);
 
@@ -49,60 +50,53 @@ public class OI {
 	}
 
 	public static void controlArm() {
-		if (launchpad.getRawAxis(Ports.armAxis) != 0) {
-			Arm.setMode(true);
+		if (armManualSwitch.isHeld()) {
 			Arm.setPosition(launchpad.getRawAxis(Ports.armAxis));
 		} else {
 			if (arm0B.isBumped()) {
-				Arm.presetPosition(0);
-				Arm.setMode(false);
+				Arm.setPresetPosition(0);
 			}
 
 			if (arm1B.isBumped()) {
-				Arm.presetPosition(1);
-				Arm.setMode(false);
+				Arm.setPresetPosition(1);
 			}
-
-			if (!Arm.getMode()) {
-				Arm.goToPosition();
-			}
-
 		}
+		Arm.periodicControl();
 	}
 
 	public static void controlElevator() {
 		if (elevatorUpB.isHeld() || elevatorDownB.isHeld()) {
-			Arm.setMode(true);
+			Elevator.setManualMode(true);
 			if (elevatorUpB.isHeld()) {
-				Elevator.manualPosition(true);
+				Elevator.updateManualPosition(true);
 			} else if(elevatorDownB.isHeld()) {
-				Elevator.manualPosition(false);
+				Elevator.updateManualPosition(false);
 			}
 		} else {
 			if (elevator0B.isBumped()) {
-				Elevator.presetPosition(0);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(0);
+				Elevator.setManualMode(false);
 			} else if (elevator1B.isBumped()) {
-				Elevator.presetPosition(1);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(1);
+				Elevator.setManualMode(false);
 			} else if (elevator2B.isBumped()) {
-				Elevator.presetPosition(2);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(2);
+				Elevator.setManualMode(false);
 			} else if (elevator3B.isBumped()) {
-				Elevator.presetPosition(3);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(3);
+				Elevator.setManualMode(false);
 			} else if (elevator4B.isBumped()) {
-				Elevator.presetPosition(4);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(4);
+				Elevator.setManualMode(false);
 			} else if (elevator5B.isBumped()) {
-				Elevator.presetPosition(5);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(5);
+				Elevator.setManualMode(false);
 			} else if (elevator6B.isBumped()) {
-				Elevator.presetPosition(6);
-				Elevator.setMode(false);
+				Elevator.setPresetPosition(6);
+				Elevator.setManualMode(false);
 			}
 		}
-		Elevator.pControl();
+		Elevator.periodicPControl();
 	}
 
 	public static void controlPDP() {
