@@ -5,14 +5,14 @@ import org.usfirst.frc.team293.robot.Ports;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm {
 	public static final Talon arm = new Talon(Ports.arm);
 	private static final AnalogPotentiometer pot = new AnalogPotentiometer(Ports.armPot, 2, -1);
-	private static final PIDController pid = new PIDController(0.1, 0.1, 0.1, pot, arm);
 	private static double position = 0;
 	static double[] positions = new double[] {0,0.25,0.75};
-	private static final double tolerance = 0.02;
+	private static final double kP = 5;
 	
 	public static void move(double speed) {
 		arm.set(speed);
@@ -27,9 +27,10 @@ public class Arm {
 	}
 	
 	public static void periodicControl() {
-		pid.setAbsoluteTolerance(tolerance);
-		pid.setSetpoint(position);
-		pid.enable();
+		SmartDashboard.putNumber("potValue", pot.get());
+		double error = pot.get() - position;
+		SmartDashboard.putNumber("armSpeed", kP * error);
+		move(kP * error);
 	}
 
 

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SpikePIDRobotDrive{
-	private static double speed = 1;
+	private double speed = 1;
 	private RobotDrivePIDOutput robotDrivePIDOutput;
 	private PIDGyro gyro;
 	private PIDController pidController;

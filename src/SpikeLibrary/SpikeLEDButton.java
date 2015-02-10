@@ -1,18 +1,19 @@
 package SpikeLibrary;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class SpikeLEDButton extends SpikeButton{
 
-	private static int outputNumber;
-	private static int periodLength = 25;
-	private static int periodCounter = 0;
-	private static boolean flashState = false;
+	private int outputNumber;
+	private Timer timer = new Timer();
+	private double periodLength = 0.25; //length of flashes in seconds
+	private boolean flashState = false;
 	
 	public SpikeLEDButton(Joystick joystick, int buttonNumber, int outputNumber) {
 		super(joystick, buttonNumber);
-		this.outputNumber = outputNumber;
 		this.joystick = joystick;
+		timer.start();
 
 	}
 	
@@ -21,9 +22,8 @@ public class SpikeLEDButton extends SpikeButton{
 	}
 	
 	public void flash() {
-		periodCounter += 1;
-		if (periodCounter > periodLength) {
-			periodCounter = 0;
+		if (timer.get() > periodLength) {
+			timer.reset();
 			flashState = !flashState;
 			setOutput(flashState);
 		}

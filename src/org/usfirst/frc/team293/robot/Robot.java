@@ -8,6 +8,7 @@ import autonomous.BinToteStack;
 import autonomous.RobotSet;
 import autonomous.ToteSet;
 import autonomous.ToteStack;
+import subsystems.Arm;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
 import subsystems.PDP;
