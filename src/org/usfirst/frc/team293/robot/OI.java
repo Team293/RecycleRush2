@@ -52,13 +52,13 @@ public class OI {
 	public static void controlArm() {
 		//if (armManualSwitch.isHeld()) {
 			Arm.setPosition(launchpad.getRawAxis(Ports.armAxis));
-		/*}*/ else {
+		/*} else {
 			if (arm0B.isBumped()) {
 				Arm.setPresetPosition(0);
 			} else if (arm1B.isBumped()) {
 				Arm.setPresetPosition(1);
 			}
-		}
+		} */
 		Arm.periodicControl();
 	}
 

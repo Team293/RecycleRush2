@@ -16,7 +16,7 @@ public class Elevator {
 	private static final DigitalInput topLimit = new DigitalInput(Ports.elevatorTopLimit);
 	private static final DigitalInput bottomLimit = new DigitalInput(Ports.elevatorBottomLimit);
 	private static boolean manualMode = true;
-	private static double position = 0;
+	private static double targetPosition = 0;
 	static int[] positions = new int[] {234,2355,2533};
 	private static double kP = 0.68;
 	private static final double encoderScale = 512; //counts per rotation
@@ -24,7 +24,7 @@ public class Elevator {
 
 	public static void reset() {
 		encoder.reset();
-		position = 0;
+		targetPosition = 0;
 	}
 
 	public static void move(double speed) {
@@ -50,15 +50,15 @@ public class Elevator {
 
 	public static void setPresetPosition(int positionInput) {
 		//set the target position to a preset position
-		position = positions[positionInput];
+		targetPosition = positions[positionInput];
 	}
 	
 	public static void updateManualPosition(boolean direction) {
 		//change the target position manually
 		if (direction) {
-			position += 0.005;
+			targetPosition += 0.005;
 		} else {
-			position -= 0.004;
+			targetPosition -= 0.004;
 		}
 	}
 	
@@ -72,8 +72,8 @@ public class Elevator {
 		//go to the target position
 		double currentPosition = getInches();
 		SmartDashboard.putNumber("currentPosition", currentPosition);
-		SmartDashboard.putNumber("targetPosition", position);
-		double rawError = position-currentPosition;
+		SmartDashboard.putNumber("targetPosition", targetPosition);
+		double rawError = targetPosition-currentPosition;
 		double output = rawError*kP;
 		move(output);
 		SmartDashboard.putNumber("elevatorOutput", output);
