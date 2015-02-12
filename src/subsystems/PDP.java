@@ -8,8 +8,8 @@ public class PDP {
 	private static final PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	public static void monitor() {
-		/*SmartDashboard.putNumber("current0", pdp.getCurrent(0));
-		SmartDashboard.putNumber("current1", pdp.getCurrent(1));*/
+		SmartDashboard.putNumber("leftDriveCurrent", pdp.getCurrent(0));
+		SmartDashboard.putNumber("rightDriveCurrent", pdp.getCurrent(1));
 		SmartDashboard.putNumber("Mast", pdp.getCurrent(2));
 		/*SmartDashboard.putNumber("current3", pdp.getCurrent(3));
 		SmartDashboard.putNumber("current4", pdp.getCurrent(4));

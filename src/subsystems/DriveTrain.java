@@ -24,6 +24,12 @@ public class DriveTrain {
 		drive.tankDrive(-leftSpeed, -rightSpeed);
 	}
 	
+	public static void adjustedDrive(double leftValue, double rightValue) {
+		leftValue = Math.signum(leftValue) * leftValue * leftValue;
+		rightValue = Math.signum(rightValue) * rightValue * rightValue;
+		tankDrive(leftValue, rightValue);
+	}
+	
 	public static void arcadeDrive(double move, double rotate) {
 		drive.arcadeDrive(move, rotate);
 	}

@@ -17,12 +17,24 @@ public class Arm {
 		arm.set(speed);
 	}
 	
+	public static void viewPosition() {
+		SmartDashboard.putNumber("armPosition", pot.get());
+	}
+	
 	public static void setPresetPosition(int positionInput) {
 		targetPosition = positions[positionInput];
 	}
 	
 	public static void setPosition(double positionInput) {
 		targetPosition = positionInput;
+	}
+	
+	private static void updateManualPosition(boolean direction) {
+		if (direction) {
+			targetPosition += 0.005;
+		} else {
+			targetPosition -= 0.005;
+		}
 	}
 	
 	public static void periodicControl() {

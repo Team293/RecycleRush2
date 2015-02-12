@@ -42,15 +42,7 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("tote set", new ToteSet());
 		autonomousChooser.addObject("tote stack", new ToteStack());
 
-		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
-		
-	//	DriveTrain.init();
-		
-
-    	SmartDashboard.putNumber("DriveP", 0.3);
-    	SmartDashboard.putNumber("DriveI", .01);
-    	SmartDashboard.putNumber("DriveD", 0);
-    	
+		SmartDashboard.putData("Which Autonomous?", autonomousChooser);    	
 	}
 
 	public void autonomousInit() {
@@ -63,7 +55,7 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-			//SmartDashboard.putNumber("time", Auto.autoTimer.get());
+			SmartDashboard.putNumber("time", Auto.autoTimer.get());
 			selectedAuto.run();
 	}
 
@@ -73,11 +65,13 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		Elevator.reset();
 	}
+	
 	public void teleopPeriodic() {
 		OI.controlDriveTrain();
-		OI.controlElevator();
+		Arm.viewPosition();
+		//OI.controlElevator();
 		//OI.controlArm();
-		//OI.controlPDP();
+		OI.controlPDP();
 		
 	}
 

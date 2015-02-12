@@ -16,8 +16,8 @@ public class OI {
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
 	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick);
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
-	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad,5);
-	private static final SpikeButton elevatorUpB = new SpikeButton(launchpad,6);
+	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, 6);
+	private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, 7);
 
 	/*	private static final SpikeLEDButton elevator0B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	private static final SpikeLEDButton elevator1B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
@@ -46,7 +46,7 @@ public class OI {
 
 
 	public static void controlDriveTrain() {
-		//DriveTrain.tankDrive(leftJoystick.getY(), rightJoystick.getY());
+		DriveTrain.adjustedDrive(leftJoystick.getY(), rightJoystick.getY());
 	}
 
 	public static void controlArm() {
