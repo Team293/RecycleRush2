@@ -15,10 +15,17 @@ public class Elevator {
 	private static final DigitalInput bottomLimit = new DigitalInput(Ports.elevatorBottomLimit);
 	private static boolean manualMode = true;
 	private static double targetPosition = 0;
-	static int[] positions = new int[] {234,2355,2533};
-	private static double kP = 1.67;
+	private static final double PICKUP = 0.75;
+	private static final double TRAVEL = 4.25;
+	private static final double ONETOTE = 15.25;
+	private static final double CANONTOTE = 19.5;
+	private static final double TWOTOTE = 27.5;
+	private static final double CANONTWOTOTE = 31.5;
+	static double[] positions = new double[] {PICKUP, TRAVEL, ONETOTE, CANONTOTE, TWOTOTE, CANONTWOTOTE};
+	private static double kP = 1.19;
 	private static final double encoderScale = 512; //counts per rotation
-	private static final double circumference = 4.2; //of belt gear
+	private static final double circumference = 7.56; //of belt gear
+
 
 	public static void reset() {
 		encoder.reset();
@@ -28,10 +35,10 @@ public class Elevator {
 	public static void move(double speed) {
 		//stops from moving through limits
 		if (topLimit.get()) {
-			speed = SpikeMath.cap(speed, 0, 1);
+			speed = SpikeMath.cap(speed, -1, 0);
 		} else if (bottomLimit.get()) {
 			reset();
-			speed = SpikeMath.cap(speed, -1, 0);
+			speed = SpikeMath.cap(speed, 0, 1);
 		}
 		elevator.set(speed);
 	}
