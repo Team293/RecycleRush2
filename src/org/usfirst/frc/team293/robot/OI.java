@@ -16,8 +16,8 @@ public class OI {
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
 	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick);
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
-	private static final SpikeButton elevatorDownB = new SpikeButton(leftJoystick, 1);
-	private static final SpikeButton elevatorUpB = new SpikeButton(rightJoystick, 1);
+	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad,5);
+	private static final SpikeButton elevatorUpB = new SpikeButton(launchpad,6);
 
 	/*	private static final SpikeLEDButton elevator0B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	private static final SpikeLEDButton elevator1B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
@@ -70,7 +70,7 @@ public class OI {
 			} else if(elevatorDownB.isHeld()) {
 				Elevator.updateManualPosition(false);
 			}
-		} else {
+		} /*else {
 			if (elevator0B.isBumped()) {
 				Elevator.setPresetPosition(0);
 				Elevator.setManualMode(false);
@@ -93,7 +93,7 @@ public class OI {
 				Elevator.setPresetPosition(6);
 				Elevator.setManualMode(false);
 			}
-		}
+		}*/
 		Elevator.periodicPControl();
 	}
 

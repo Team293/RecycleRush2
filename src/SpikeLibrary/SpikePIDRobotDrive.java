@@ -1,5 +1,8 @@
 package SpikeLibrary;
 
+import org.usfirst.frc.team293.robot.Ports;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -14,7 +17,9 @@ public class SpikePIDRobotDrive{
 	private PIDController pidController;
 	private double iterativeSetpoint = 0;
 	private double finalSetpoint = 0;
-
+	private Encoder leftEncoder= new Encoder(Ports.leftDriveEncoder1,Ports.leftDriveEncoder2);
+	private Encoder rightEncoder=new Encoder(Ports.rightDriveEncoder1, Ports.rightDriveEncoder2);
+	//private Encoder centerEncoder=new Encoder(Ports.centerDriveEncoder1,Ports.centerDriveEncoder2);
 	private class RobotDrivePIDOutput implements PIDOutput {
 		RobotDrive m_robotDrive;
 
@@ -96,6 +101,25 @@ public class SpikePIDRobotDrive{
 	public boolean onTarget() {
 		return pidController.onTarget();
 	}
+	
+/*public void SpikeTractionControl(){
+	double centerencoder=centerEncoder.getRate();	
+	double leftencoder=leftEncoder.getRate();
+	double rightencoder=rightEncoder.getRate();
+	SmartDashboard.putNumber("leftEncoder", leftencoder);
+	SmartDashboard.putNumber("rightEncoder", rightencoder);
+	SmartDashboard.putNumber("leftEncoder", centerencoder);
+	double averageencoder=(leftencoder+rightencoder)/2;
+	
+	double differenceinencoder=averageencoder-centerencoder;
+	
+	if (differenceinencoder>.1||differenceinencoder<-.1){
+		
+	}
+	
+}*/
 
 
 }
+
+
