@@ -4,6 +4,7 @@ import SpikeLibrary.SpikeButton;
 import SpikeLibrary.SpikeLEDButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import subsystems.Arm;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
@@ -16,9 +17,9 @@ public class OI {
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
 	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick);
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
+	
 	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
 	private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
-
 	/*private static final SpikeLEDButton elevator0B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	private static final SpikeLEDButton elevator1B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
 	private static final SpikeLEDButton elevator2B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
@@ -46,12 +47,14 @@ public class OI {
 
 
 	public static void controlDriveTrain() {
-		DriveTrain.adjustedDrive(leftJoystick.getY(), rightJoystick.getY());
+		DriveTrain.squaredDrive(-leftJoystick.getY(), -rightJoystick.getY());
+		SmartDashboard.putNumber("leftJoy", -leftJoystick.getY());
+		SmartDashboard.putNumber("rightJoy", -rightJoystick.getY());
 	}
 
 	public static void controlArm() {
 		//if (armManualSwitch.isHeld()) {
-			Arm.setPosition(launchpad.getRawAxis(Ports.armAxis));
+			Arm.setPosition(launchpad.getRawAxis(Ports.armA));
 		/*} else {
 			if (arm0B.isBumped()) {
 				Arm.setPresetPosition(0);
@@ -63,6 +66,15 @@ public class OI {
 	}
 
 	public static void controlElevator() {
+		double axis = launchpad.getRawAxis(Ports.elevatorA);
+		if (Math.abs(axis) > 0.2) {
+			Elevator.setManualMode(true);
+			if (axis > 0) {
+				Elevator.updateManualPosition(true);
+			} else if (axis < 0) {
+				Elevator.updateManualPosition(false);
+			}
+		}
 		if (elevatorUpB.isHeld() || elevatorDownB.isHeld()) {
 			Elevator.setManualMode(true);
 			if (elevatorUpB.isHeld()) {

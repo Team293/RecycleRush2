@@ -17,13 +17,12 @@ public class Ports {
 	//launchpad
 	elevatorUpB = 6,
 	elevatorDownB = 5,
-	elevator0BInput = 1,
-	elevator1BInput = 2,
-	elevator2BInput = 3,
-	elevator3BInput = 4,
-	elevator4BInput = 5,
-	elevator5BInput = 6,
-	elevator6BInput = 7,
+	elevator0BInput = 2,
+	elevator1BInput = 10,
+	elevator2BInput = 9,
+	elevator3BInput = 8,
+	elevator4BInput = 6,
+	elevator5BInput = 7,
 
 	/*//LEDs
 	elevator0BOutput = 0,
@@ -35,8 +34,8 @@ public class Ports {
 	elevator6BOutput = 0,
 	 */
 
-	elevatorAxis = 1,
-	armAxis = 2,
+	elevatorA = 1,
+	armA = 6,
 
 	armManualSwitch = 0,
 	arm0B = 8,

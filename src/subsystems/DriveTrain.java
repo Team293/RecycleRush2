@@ -20,14 +20,26 @@ public class DriveTrain {
     
     private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
   
+
 	public static void tankDrive(double leftSpeed, double rightSpeed) {
-		drive.tankDrive(-leftSpeed, -rightSpeed);
+		drive.tankDrive(leftSpeed, rightSpeed);
 	}
 	
-	public static void adjustedDrive(double leftValue, double rightValue) {
+	public static void squaredDrive(double leftValue, double rightValue) {
 		leftValue = Math.signum(leftValue) * leftValue * leftValue;
 		rightValue = Math.signum(rightValue) * rightValue * rightValue;
 		tankDrive(leftValue, rightValue);
+	}
+	
+	public static void view() {
+		SmartDashboard.putNumber("leftEncoderCount", leftEncoder.get());
+		SmartDashboard.putNumber("rightEncoderCount", rightEncoder.get());
+		SmartDashboard.putNumber("leftEncoderRate", leftEncoder.getRate());
+		SmartDashboard.putNumber("rightEncoderRate", rightEncoder.getRate());
+	}
+	
+	public static void skidControl(double leftInput, double rightInput) {
+		
 	}
 	
 	public static void arcadeDrive(double move, double rotate) {
