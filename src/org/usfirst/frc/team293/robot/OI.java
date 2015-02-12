@@ -46,7 +46,7 @@ public class OI {
 
 
 	public static void controlDriveTrain() {
-		DriveTrain.tankDrive(leftJoystick.getY(), rightJoystick.getY());
+		//DriveTrain.tankDrive(leftJoystick.getY(), rightJoystick.getY());
 	}
 
 	public static void controlArm() {

@@ -50,12 +50,12 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("DriveP", 0.3);
     	SmartDashboard.putNumber("DriveI", .01);
     	SmartDashboard.putNumber("DriveD", 0);
-    	Elevator.reset();
+    	
 	}
 
 	public void autonomousInit() {
 		selectedAuto = (Auto) autonomousChooser.getSelected();
-		DriveTrain.init();
+		
 		selectedAuto.init();
 	}
 
