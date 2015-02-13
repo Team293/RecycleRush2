@@ -2,6 +2,7 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
+import SpikeLibrary.SpikeLimit;
 import SpikeLibrary.SpikeMath;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -11,16 +12,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator {
 	private static final VictorSP elevator = new VictorSP(Ports.elevator);
 	private static final Encoder encoder = new Encoder(Ports.elevatorEncoder1, Ports.elevatorEncoder2);
-	private static final DigitalInput topLimit = new DigitalInput(Ports.elevatorTopLimit);
-	private static final DigitalInput bottomLimit = new DigitalInput(Ports.elevatorBottomLimit);
+	private static final SpikeLimit topLimit = new SpikeLimit(Ports.elevatorTopLimit);
+	private static final SpikeLimit bottomLimit = new SpikeLimit(Ports.elevatorBottomLimit);
 	private static boolean manualMode = true;
 	private static double targetPosition = 0;
 	private static final double PICKUP = 0.75;
-	private static final double TRAVEL = 4.25;
-	private static final double ONETOTE = 15.25;
-	private static final double CANONTOTE = 19.5;
-	private static final double TWOTOTE = 27.5;
-	private static final double CANONTWOTOTE = 31.5;
+	private static final double TRAVEL = 4.75;
+	private static final double ONETOTE = 15.75;
+	private static final double CANONTOTE = 20;
+	private static final double TWOTOTE = 28;
+	private static final double CANONTWOTOTE = 32;
 	static double[] positions = new double[] {PICKUP, TRAVEL, ONETOTE, CANONTOTE, TWOTOTE, CANONTWOTOTE};
 	private static double kP = 1.19;
 	private static final double encoderScale = 512; //counts per rotation
@@ -34,11 +35,13 @@ public class Elevator {
 
 	public static void move(double speed) {
 		//stops from moving through limits
-		if (topLimit.get()) {
+		if (topLimit.isHeld()) {
 			speed = SpikeMath.cap(speed, -1, 0);
-		} else if (bottomLimit.get()) {
-			reset();
+		} else if (bottomLimit.isHeld()) {
 			speed = SpikeMath.cap(speed, 0, 1);
+		}
+		if (bottomLimit.isBumped()) {
+			reset();
 		}
 		elevator.set(speed);
 	}
@@ -80,7 +83,9 @@ public class Elevator {
 		SmartDashboard.putNumber("targetPosition", targetPosition);
 		double rawError = targetPosition - currentPosition;
 		double output = rawError * kP;
-		elevator.set(output);
+		move(output);
+		SmartDashboard.putBoolean("bottomLimit", bottomLimit.get());
+		SmartDashboard.putBoolean("topLimit", topLimit.get());
 		SmartDashboard.putNumber("elevatorOutput", output);
 	}
 }

@@ -32,9 +32,9 @@ public class OI {
 
 	//private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
 	//private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
-	private static final SpikeButton elevator0B = new SpikeButton(launchpad, Ports.elevator0BInput);
+	private static final SpikeButton elevator0B = new SpikeButton(leftJoystick, 1);
 	private static final SpikeButton elevator1B = new SpikeButton(launchpad, Ports.elevator1BInput);
-	private static final SpikeButton elevator2B = new SpikeButton(launchpad, Ports.elevator2BInput);
+	private static final SpikeButton elevator2B = new SpikeButton(rightJoystick, 1);
 	private static final SpikeButton elevator3B = new SpikeButton(launchpad, Ports.elevator3BInput);
 	/*private static final SpikeButton elevator4B = new SpikeButton(launchpad, Ports.elevator4BInput);
 	private static final SpikeButton elevator5B = new SpikeButton(launchpad, Ports.elevator5BInput);
@@ -47,7 +47,7 @@ public class OI {
 
 
 	public static void controlDriveTrain() {
-		DriveTrain.squaredDrive(-leftJoystick.getY(), -rightJoystick.getY());
+		DriveTrain.tankDrive(-leftJoystick.getY(), -rightJoystick.getY());
 		SmartDashboard.putNumber("leftJoy", -leftJoystick.getY());
 		SmartDashboard.putNumber("rightJoy", -rightJoystick.getY());
 	}
@@ -66,8 +66,8 @@ public class OI {
 	}
 
 	public static void controlElevator() {
-		double axis = launchpad.getRawAxis(Ports.elevatorA);
-		if (Math.abs(axis) > 0.2) {
+		double axis = -launchpad.getRawAxis(Ports.elevatorA);
+		if (Math.abs(axis) > 0.1) {
 			Elevator.setManualMode(true);
 			if (axis > 0) {
 				Elevator.updateManualPosition(true);
