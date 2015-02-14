@@ -91,9 +91,9 @@ public class Elevator {
 		if (output < -.5) {
 			output = -.5;
 		} 
-		if (output > .5){
-			output = .5;
-		}
+		//if (output > .5){
+			//output = .5;
+		//}
 		move(output); 
 		SmartDashboard.putBoolean("bottomLimit", bottomLimit.get());
 		SmartDashboard.putBoolean("topLimit", topLimit.get());
