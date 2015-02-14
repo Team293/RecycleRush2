@@ -4,7 +4,6 @@ import org.usfirst.frc.team293.robot.Ports;
 
 import SpikeLibrary.SpikeLimit;
 import SpikeLibrary.SpikeMath;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +25,8 @@ public class Elevator {
 	private static double kP = 1.19;
 	private static final double encoderScale = 512; //counts per rotation
 	private static final double circumference = 7.56; //of belt gear
+	
+	private static boolean wasBumped = false;
 
 
 	public static void reset() {
@@ -39,10 +40,13 @@ public class Elevator {
 			speed = SpikeMath.cap(speed, -1, 0);
 		} else if (bottomLimit.isHeld()) {
 			speed = SpikeMath.cap(speed, 0, 1);
-		}
-		if (bottomLimit.isBumped()) {
 			reset();
 		}
+		if (bottomLimit.isBumped()) {
+			wasBumped = true;
+			reset();
+		}
+		SmartDashboard.putBoolean("bottomLimitWasBumped", wasBumped);
 		elevator.set(speed);
 	}
 	
@@ -63,11 +67,11 @@ public class Elevator {
 	
 	public static void updateManualPosition(boolean direction) {
 		//change the target position manually
-		if (direction) {
-			targetPosition += 0.126;
-		} else {
-			targetPosition -= 0.126;
-		}
+		targetPosition += (direction ? 0.25:-0.2);
+	}
+	
+	public static void toggleOneTote() {
+		targetPosition = ((targetPosition == PICKUP) ? ONETOTE:PICKUP);
 	}
 	
 	public static double getInches() {

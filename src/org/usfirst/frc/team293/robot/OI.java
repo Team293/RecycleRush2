@@ -32,13 +32,13 @@ public class OI {
 
 	//private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
 	//private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
-	private static final SpikeButton elevator0B = new SpikeButton(leftJoystick, 1);
+	private static final SpikeButton oneToteB = new SpikeButton(rightJoystick, Ports.trigger);
+	private static final SpikeButton elevator0B = new SpikeButton(launchpad, Ports.elevator0BInput);
 	private static final SpikeButton elevator1B = new SpikeButton(launchpad, Ports.elevator1BInput);
-	private static final SpikeButton elevator2B = new SpikeButton(rightJoystick, 1);
+	private static final SpikeButton elevator2B = new SpikeButton(launchpad, Ports.elevator2BInput);
 	private static final SpikeButton elevator3B = new SpikeButton(launchpad, Ports.elevator3BInput);
-	/*private static final SpikeButton elevator4B = new SpikeButton(launchpad, Ports.elevator4BInput);
+	private static final SpikeButton elevator4B = new SpikeButton(launchpad, Ports.elevator4BInput);
 	private static final SpikeButton elevator5B = new SpikeButton(launchpad, Ports.elevator5BInput);
-	private static final SpikeButton elevator6B = new SpikeButton(launchpad, Ports.elevator6BInput);*/
 
 	private static final SpikeButton armManualSwitch = new SpikeButton(launchpad, Ports.armManualSwitch);
 	private static final SpikeButton arm0B = new SpikeButton(launchpad, Ports.arm0B);
@@ -54,7 +54,8 @@ public class OI {
 
 	public static void controlArm() {
 		//if (armManualSwitch.isHeld()) {
-			Arm.setPosition(launchpad.getRawAxis(Ports.armA));
+			Arm.setPosition(-launchpad.getRawAxis(Ports.armA));
+			SmartDashboard.putNumber("potControl", launchpad.getRawAxis(Ports.armA));
 		/*} else {
 			if (arm0B.isBumped()) {
 				Arm.setPresetPosition(0);
@@ -66,15 +67,6 @@ public class OI {
 	}
 
 	public static void controlElevator() {
-		double axis = -launchpad.getRawAxis(Ports.elevatorA);
-		if (Math.abs(axis) > 0.1) {
-			Elevator.setManualMode(true);
-			if (axis > 0) {
-				Elevator.updateManualPosition(true);
-			} else if (axis < 0) {
-				Elevator.updateManualPosition(false);
-			}
-		}
 		if (elevatorUpB.isHeld() || elevatorDownB.isHeld()) {
 			Elevator.setManualMode(true);
 			if (elevatorUpB.isHeld()) {
@@ -83,7 +75,10 @@ public class OI {
 				Elevator.updateManualPosition(false);
 			}
 		} else {
-			if (elevator0B.isBumped()) {
+			if (oneToteB.isBumped()) {
+				Elevator.toggleOneTote();
+				Elevator.setManualMode(false);
+			} else if (elevator0B.isBumped()) {
 				Elevator.setPresetPosition(0);
 				Elevator.setManualMode(false);
 			} else if (elevator1B.isBumped()) {
@@ -95,13 +90,13 @@ public class OI {
 			} else if (elevator3B.isBumped()) {
 				Elevator.setPresetPosition(3);
 				Elevator.setManualMode(false);
-			} /*else if (elevator4B.isBumped()) {
+			} else if (elevator4B.isBumped()) {
 				Elevator.setPresetPosition(4);
 				Elevator.setManualMode(false);
 			} else if (elevator5B.isBumped()) {
 				Elevator.setPresetPosition(5);
 				Elevator.setManualMode(false);
-			}*/
+			}
 		}
 		Elevator.periodicPControl();
 	}

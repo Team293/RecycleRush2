@@ -35,14 +35,14 @@ public class Robot extends IterativeRobot {
 	Auto selectedAuto;
 
 	public void robotInit() {
-		autonomousChooser.addObject("bin set", new BinSet());
+		/*autonomousChooser.addObject("bin set", new BinSet());
 		autonomousChooser.addObject("bin & tote set", new BinToteSet());
 		autonomousChooser.addObject("bin set & tote stack", new BinToteStack());
 		autonomousChooser.addObject("robot set", new RobotSet());
 		autonomousChooser.addObject("tote set", new ToteSet());
 		autonomousChooser.addObject("tote stack", new ToteStack());
 
-		SmartDashboard.putData("Which Autonomous?", autonomousChooser);    	
+		SmartDashboard.putData("Which Autonomous?", autonomousChooser);*/
 	}
 
 	public void autonomousInit() {
@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 		OI.controlDriveTrain();
 		Arm.viewPosition();
 		OI.controlElevator();
-		//OI.controlArm();
+		OI.controlArm();
 		OI.controlPDP();
 		
 	}
