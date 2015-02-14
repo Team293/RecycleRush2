@@ -17,8 +17,8 @@ public class DriveTrain {
     private static final Encoder leftEncoder = new Encoder(Ports.leftDriveEncoder1, Ports.leftDriveEncoder2);
     private static final Encoder rightEncoder = new Encoder(Ports.rightDriveEncoder1, Ports.rightDriveEncoder2);
     
-    private static final Talon leftMotor = new Talon(Ports.leftDrive);
-    private static final Talon rightMotor = new Talon(Ports.rightDrive);
+    private static final VictorSP leftMotor = new VictorSP(Ports.leftDrive);
+    private static final VictorSP rightMotor = new VictorSP(Ports.rightDrive);
     
     private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
   

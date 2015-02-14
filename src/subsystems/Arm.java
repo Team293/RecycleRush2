@@ -5,10 +5,11 @@ import org.usfirst.frc.team293.robot.Ports;
 import SpikeLibrary.SpikeMath;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm {
-	public static final Talon arm = new Talon(Ports.arm);
+	public static final VictorSP arm = new VictorSP(Ports.arm);
 	private static final double min = -0.36;
 	private static final double max = 0.73;
 	private static final AnalogPotentiometer pot = new AnalogPotentiometer(Ports.armPot, 2, -1);
