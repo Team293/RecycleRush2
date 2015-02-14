@@ -16,6 +16,7 @@ public class Ports {
 	trigger = 1,
 
 	//launchpad
+	lever = 0,
 	elevatorUpB = 5,
 	elevatorDownB = 4,
 	elevator0BInput = 2,

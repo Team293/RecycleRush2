@@ -14,7 +14,9 @@ public class Elevator {
 	private static final SpikeLimit topLimit = new SpikeLimit(Ports.elevatorTopLimit);
 	private static final SpikeLimit bottomLimit = new SpikeLimit(Ports.elevatorBottomLimit);
 	private static boolean manualMode = true;
+	private static boolean softMode = false;
 	private static double targetPosition = 0;
+	private static double finalTargetPosition = 0;
 	private static final double PICKUP = 0.75;
 	private static final double TRAVEL = 4.75;
 	private static final double ONETOTE = 15.75;
@@ -31,6 +33,7 @@ public class Elevator {
 
 	public static void reset() {
 		encoder.reset();
+		encoder.setDistancePerPulse(0.01477);
 		targetPosition = 0;
 	}
 
@@ -40,11 +43,7 @@ public class Elevator {
 			speed = SpikeMath.cap(speed, -1, 0);
 		} else if (bottomLimit.isHeld()) {
 			speed = SpikeMath.cap(speed, 0, 1);
-			reset();
-		}
-		if (bottomLimit.isBumped()) {
-			wasBumped = true;
-			reset();
+			encoder.reset();
 		}
 		SmartDashboard.putBoolean("bottomLimitWasBumped", wasBumped);
 		elevator.set(speed);
@@ -59,10 +58,32 @@ public class Elevator {
 		//returns whether is controlled manually or through preset positions
 		return manualMode;
 	}
+	
+	public static void setSoftMode(boolean mode) {
+		softMode = mode;
+	}
 
-	public static void setPresetPosition(int positionInput) {
+	public static void hardSetPresetPosition(int positionInput) {
 		//set the target position to a preset position
 		targetPosition = positions[positionInput];
+	}
+	
+	public static void softSetPresetPosition(int positionInput) {
+		finalTargetPosition = positions[positionInput];
+		if (Math.abs(finalTargetPosition - targetPosition) > 0.25)
+		if (finalTargetPosition > targetPosition) {
+			updateManualPosition(true);
+		} else if (finalTargetPosition < targetPosition) {
+			updateManualPosition(false);
+		}
+	}
+	
+	public static void setPresetPosition(int positionInput) {
+		if (softMode) {
+			softSetPresetPosition(positionInput);
+		} else {
+			hardSetPresetPosition(positionInput);
+		}
 	}
 	
 	public static void updateManualPosition(boolean direction) {
@@ -90,10 +111,7 @@ public class Elevator {
 		//limiting output to elevator motor speed
 		if (output < -.5) {
 			output = -.5;
-		} 
-		//if (output > .5){
-			//output = .5;
-		//}
+		}
 		move(output); 
 		SmartDashboard.putBoolean("bottomLimit", bottomLimit.get());
 		SmartDashboard.putBoolean("topLimit", topLimit.get());

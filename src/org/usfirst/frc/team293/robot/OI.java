@@ -15,7 +15,7 @@ public class OI {
 	//gamepad or custom Launchpad
 	public boolean gamepad=true;
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
-	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick);
+	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick); 
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
 	
 	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
@@ -32,6 +32,7 @@ public class OI {
 
 	//private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
 	//private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
+	private static final SpikeButton softSwitch = new SpikeButton(launchpad, Ports.lever);
 	private static final SpikeButton oneToteB = new SpikeButton(rightJoystick, Ports.trigger);
 	private static final SpikeButton elevator0B = new SpikeButton(launchpad, Ports.elevator0BInput);
 	private static final SpikeButton elevator1B = new SpikeButton(launchpad, Ports.elevator1BInput);
@@ -67,6 +68,11 @@ public class OI {
 	}
 
 	public static void controlElevator() {
+		if (softSwitch.isHeld()) {
+			Elevator.setSoftMode(true);
+		} else {
+			Elevator.setSoftMode(false);
+		}
 		if (elevatorUpB.isHeld() || elevatorDownB.isHeld()) {
 			Elevator.setManualMode(true);
 			if (elevatorUpB.isHeld()) {

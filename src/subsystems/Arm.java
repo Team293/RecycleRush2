@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm {
-	public static final VictorSP arm = new VictorSP(Ports.arm);
+	public static final Talon arm = new Talon(Ports.arm);
 	private static final double min = -0.36;
 	private static final double max = 0.73;
 	private static final AnalogPotentiometer pot = new AnalogPotentiometer(Ports.armPot, 2, -1);
