@@ -5,8 +5,7 @@ import autonomous.Auto;
 import autonomous.BinSet;
 import autonomous.BinToteSet;
 import autonomous.BinToteStack;
-import autonomous.RobotSet;
-import autonomous.ToteSet;
+import autonomous.SensorDriveStraight;
 import autonomous.ToteStack;
 import subsystems.Arm;
 import subsystems.DriveTrain;
@@ -29,12 +28,13 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 
-	SendableChooser autonomousChooser = new SendableChooser();
+	//SendableChooser autonomousChooser = new SendableChooser();
 	String[] autonomiNames;
 	Auto[] autonomi;
 	Auto selectedAuto;
 
 	public void robotInit() {
+		DriveTrain.gyroInit(); //for straightdrive
 		/*autonomousChooser.addObject("bin set", new BinSet());
 		autonomousChooser.addObject("bin & tote set", new BinToteSet());
 		autonomousChooser.addObject("bin set & tote stack", new BinToteStack());
@@ -46,9 +46,10 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		selectedAuto = (Auto) autonomousChooser.getSelected();
+		//selectedAuto = (Auto) autonomousChooser.getSelected();
 		
-		selectedAuto.init();
+		//selectedAuto.init();
+		
 	}
 
 	/**
@@ -56,7 +57,9 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 			SmartDashboard.putNumber("time", Auto.autoTimer.get());
-			selectedAuto.run();
+		//	selectedAuto.run();
+			SensorDriveStraight.blah();
+			
 	}
 
 	/**
