@@ -3,7 +3,7 @@ package autonomous;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
 
-public class BinToteSet extends Auto{
+public class BinTote extends Auto{
 	/**
 	 * Puts yellow bin without stacking the three bins in a stack.
 	 */
@@ -13,7 +13,7 @@ public class BinToteSet extends Auto{
 	private static final double turnT = 0;
 	private static final double driveT = 0;
 	
-	public BinToteSet() {
+	public BinTote() {
 		super();
 	}
 

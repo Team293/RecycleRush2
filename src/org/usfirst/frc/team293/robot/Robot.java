@@ -2,16 +2,14 @@
 package org.usfirst.frc.team293.robot;
 
 import autonomous.Auto;
-import autonomous.BinSet;
-import autonomous.BinToteSet;
-import autonomous.BinToteStack;
+import autonomous.Bin;
+import autonomous.BinTote;
+import autonomous.BinToteTurn;
+import autonomous.BinTurn;
 import autonomous.RobotSet;
-import autonomous.ToteSet;
-import autonomous.ToteStack;
 import subsystems.Arm;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
-import subsystems.PDP;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,18 +33,24 @@ public class Robot extends IterativeRobot {
 	Auto selectedAuto;
 
 	public void robotInit() {
-		/*autonomousChooser.addObject("bin set", new BinSet());
-		autonomousChooser.addObject("bin & tote set", new BinToteSet());
-		autonomousChooser.addObject("bin set & tote stack", new BinToteStack());
+		SmartDashboard.putNumber("liftT", 0);
+		SmartDashboard.putNumber("captureT", 0);
+		SmartDashboard.putNumber("turnT", 0);
+		SmartDashboard.putNumber("driveT", 0);
+		SmartDashboard.putNumber("turnT2", 0);
+		
+		autonomousChooser.addObject("bin", new Bin());
+		autonomousChooser.addObject("bin & turn", new BinTurn());
+		autonomousChooser.addObject("bin & tote", new BinTote());
+		autonomousChooser.addObject("bin, tote & turn", new BinToteTurn());
 		autonomousChooser.addObject("robot set", new RobotSet());
-		autonomousChooser.addObject("tote set", new ToteSet());
-		autonomousChooser.addObject("tote stack", new ToteStack());
 
-		SmartDashboard.putData("Which Autonomous?", autonomousChooser);*/
+		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 	}
 
 	public void autonomousInit() {
 		selectedAuto = (Auto) autonomousChooser.getSelected();
+		Elevator.reset();
 		
 		selectedAuto.init();
 	}

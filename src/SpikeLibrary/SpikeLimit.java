@@ -16,7 +16,7 @@ public class SpikeLimit extends DigitalInput{
 	
 	private void update() {
 		previous = current;
-		current = get();
+		current = this.get();
 	}
 	
 	public boolean isHeld() {

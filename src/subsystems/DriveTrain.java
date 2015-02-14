@@ -3,7 +3,9 @@ package subsystems;
 import org.usfirst.frc.team293.robot.Ports;
 
 
+
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -21,6 +23,9 @@ public class DriveTrain {
     private static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
   
 
+    public static void stop() {
+    	drive.tankDrive(0,0);
+    }
 	public static void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
