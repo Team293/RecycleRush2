@@ -5,7 +5,6 @@ import org.usfirst.frc.team293.robot.Ports;
 import SpikeLibrary.SpikeMath;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm {
@@ -14,7 +13,6 @@ public class Arm {
 	private static final double max = 0.73;
 	private static final AnalogPotentiometer pot = new AnalogPotentiometer(Ports.armPot, 2, -1);
 	private static double targetPosition = 0;
-	static double[] positions = new double[] {0,0.25,0.75};
 	private static final double kP = 2;
 	
 	public static void move(double speed) {
@@ -24,10 +22,6 @@ public class Arm {
 			SpikeMath.cap(speed, 0, 1);
 		}
 		arm.set(-speed);
-	}
-	
-	public static void setPresetPosition(int positionInput) {
-		targetPosition = positions[positionInput];
 	}
 	
 	public static void setPosition(double positionInput) {

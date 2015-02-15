@@ -3,7 +3,6 @@ package org.usfirst.frc.team293.robot;
 import SpikeLibrary.SpikeButton;
 import SpikeLibrary.SpikeLEDButton;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import subsystems.Arm;
 import subsystems.DriveTrain;
