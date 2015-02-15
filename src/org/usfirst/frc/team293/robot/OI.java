@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import subsystems.Arm;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
+import subsystems.Integration;
 import subsystems.PDP;
 
 
@@ -17,7 +18,7 @@ public class OI {
 	private static final Joystick leftJoystick = new Joystick(Ports.leftJoystick);
 	private static final Joystick rightJoystick = new Joystick(Ports.rightJoystick); 
 	private static final Joystick launchpad = new Joystick(Ports.launchpad);
-	
+
 	private static final SpikeButton elevatorDownB = new SpikeButton(launchpad, Ports.elevatorDownB);
 	private static final SpikeButton elevatorUpB = new SpikeButton(launchpad, Ports.elevatorUpB);
 	/*private static final SpikeLEDButton elevator0B = new SpikeLEDButton(launchpad, Ports.elevator0BInput, Ports.elevator0BOutput);
@@ -40,10 +41,8 @@ public class OI {
 	private static final SpikeButton elevator3B = new SpikeButton(launchpad, Ports.elevator3BInput);
 	private static final SpikeButton elevator4B = new SpikeButton(launchpad, Ports.elevator4BInput);
 	private static final SpikeButton elevator5B = new SpikeButton(launchpad, Ports.elevator5BInput);
-
-	private static final SpikeButton armManualSwitch = new SpikeButton(launchpad, Ports.armManualSwitch);
-	private static final SpikeButton arm0B = new SpikeButton(launchpad, Ports.arm0B);
-	private static final SpikeButton arm1B = new SpikeButton(launchpad, Ports.arm1B);
+	
+	private static final SpikeButton rightBinB = new SpikeButton(launchpad, Ports.rightBin);
 
 
 
@@ -54,17 +53,13 @@ public class OI {
 	}
 
 	public static void controlArm() {
-		//if (armManualSwitch.isHeld()) {
+		if (rightBinB.isHeld()) {
+			Integration.rightTote();
+		} else {
 			Arm.setPosition(-launchpad.getRawAxis(Ports.armA));
 			SmartDashboard.putNumber("potControl", launchpad.getRawAxis(Ports.armA));
-		/*} else {
-			if (arm0B.isBumped()) {
-				Arm.setPresetPosition(0);
-			} else if (arm1B.isBumped()) {
-				Arm.setPresetPosition(1);
-			}
-		} */
-		Arm.periodicControl();
+			Arm.periodicControl();
+		}
 	}
 
 	public static void controlElevator() {

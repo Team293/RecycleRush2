@@ -72,7 +72,6 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		OI.controlDriveTrain();
-		Arm.viewPosition();
 		OI.controlElevator();
 		OI.controlArm();
 		OI.controlPDP();

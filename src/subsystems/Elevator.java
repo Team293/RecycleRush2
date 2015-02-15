@@ -27,7 +27,7 @@ public class Elevator {
 	private static double kP = 1.19;
 	private static final double encoderScale = 512; //counts per rotation
 	private static final double circumference = 7.56; //of belt gear
-	
+
 	private static boolean wasBumped = false;
 
 
@@ -48,7 +48,7 @@ public class Elevator {
 		SmartDashboard.putBoolean("bottomLimitWasBumped", wasBumped);
 		elevator.set(speed);
 	}
-	
+
 	public static void setManualMode(boolean newMode) {
 		//sets whether is controlled manually or through preset positions
 		manualMode = newMode;
@@ -58,7 +58,7 @@ public class Elevator {
 		//returns whether is controlled manually or through preset positions
 		return manualMode;
 	}
-	
+
 	public static void setSoftMode(boolean mode) {
 		softMode = mode;
 	}
@@ -67,17 +67,17 @@ public class Elevator {
 		//set the target position to a preset position
 		targetPosition = positions[positionInput];
 	}
-	
+
 	public static void softSetPresetPosition(int positionInput) {
 		finalTargetPosition = positions[positionInput];
-		if (Math.abs(finalTargetPosition - targetPosition) > 0.25)
-		if (finalTargetPosition > targetPosition) {
+		double error = finalTargetPosition - targetPosition;
+		if (error >= 0.125) {
 			updateManualPosition(true);
-		} else if (finalTargetPosition < targetPosition) {
+		} else if (error <= -0.125) {
 			updateManualPosition(false);
 		}
 	}
-	
+
 	public static void setPresetPosition(int positionInput) {
 		if (softMode) {
 			softSetPresetPosition(positionInput);
@@ -85,22 +85,33 @@ public class Elevator {
 			hardSetPresetPosition(positionInput);
 		}
 	}
-	
+
 	public static void updateManualPosition(boolean direction) {
 		//change the target position manually
 		targetPosition += (direction ? 0.25:-0.2);
 	}
-	
+
 	public static void toggleOneTote() {
 		targetPosition = ((targetPosition == PICKUP) ? ONETOTE:PICKUP);
 	}
-	
+
 	public static double getInches() {
 		double rotations = encoder.get()/encoderScale;
 		double inches = rotations * circumference;
 		return -inches;
 	}
 	
+	public static boolean onTarget() {
+		if (Math.abs(targetPosition - getInches()) > 0.2) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static void setPosition(double position) {
+		targetPosition = position;
+	}
+
 	public static void periodicPControl() {
 		//go to the target position
 		double currentPosition = getInches();

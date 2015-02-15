@@ -26,16 +26,19 @@ public class Arm {
 		arm.set(-speed);
 	}
 	
-	public static void viewPosition() {
-		SmartDashboard.putNumber("armPosition", pot.get());
-	}
-	
 	public static void setPresetPosition(int positionInput) {
 		targetPosition = positions[positionInput];
 	}
 	
 	public static void setPosition(double positionInput) {
 		targetPosition = positionInput;
+	}
+	
+	public static boolean onTarget() {
+		if (Math.abs(targetPosition - pot.get()) > 0.03) {
+			return true;
+		}
+		return false;
 	}
 	
 	private static void updateManualPosition(boolean direction) {
