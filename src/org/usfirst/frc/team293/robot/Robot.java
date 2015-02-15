@@ -2,11 +2,19 @@
 package org.usfirst.frc.team293.robot;
 
 import autonomous.Auto;
+<<<<<<< HEAD
 import autonomous.Bin;
 import autonomous.BinTote;
 import autonomous.BinToteTurn;
 import autonomous.BinTurn;
 import autonomous.RobotSet;
+=======
+import autonomous.BinSet;
+import autonomous.BinToteSet;
+import autonomous.BinToteStack;
+import autonomous.SensorDriveStraight;
+import autonomous.ToteStack;
+>>>>>>> origin/ImprovedAutonomous
 import subsystems.Arm;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
@@ -27,12 +35,13 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 
-	SendableChooser autonomousChooser = new SendableChooser();
+	//SendableChooser autonomousChooser = new SendableChooser();
 	String[] autonomiNames;
 	Auto[] autonomi;
 	Auto selectedAuto;
 
 	public void robotInit() {
+<<<<<<< HEAD
 		SmartDashboard.putNumber("liftT", 0);
 		SmartDashboard.putNumber("captureT", 0);
 		SmartDashboard.putNumber("turnT", 0);
@@ -43,24 +52,39 @@ public class Robot extends IterativeRobot {
 		autonomousChooser.addObject("bin & turn", new BinTurn());
 		autonomousChooser.addObject("bin & tote", new BinTote());
 		autonomousChooser.addObject("bin, tote & turn", new BinToteTurn());
+=======
+		DriveTrain.gyroInit(); //for straightdrive
+		SensorDriveStraight.init();
+		/*autonomousChooser.addObject("bin set", new BinSet());
+		autonomousChooser.addObject("bin & tote set", new BinToteSet());
+		autonomousChooser.addObject("bin set & tote stack", new BinToteStack());
+>>>>>>> origin/ImprovedAutonomous
 		autonomousChooser.addObject("robot set", new RobotSet());
 
 		SmartDashboard.putData("Which Autonomous?", autonomousChooser);
 	}
 
 	public void autonomousInit() {
+<<<<<<< HEAD
 		selectedAuto = (Auto) autonomousChooser.getSelected();
 		Elevator.reset();
+=======
+		//selectedAuto = (Auto) autonomousChooser.getSelected();
 		
-		selectedAuto.init();
+		//selectedAuto.init();
+>>>>>>> origin/ImprovedAutonomous
+		
 	}
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-			SmartDashboard.putNumber("time", Auto.autoTimer.get());
-			selectedAuto.run();
+		
+		//	selectedAuto.run();
+		//DriveTrain.enable();
+		//DriveTrain.turnleft();
+		SensorDriveStraight.blah();	
 	}
 
 	/**
