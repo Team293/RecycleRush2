@@ -29,10 +29,10 @@ public class SensorDriveStraight {
 	
 	if(state==1){  //stop and pickup can and stuff only calls once
 	DriveTrain.disable();
-	Elevator.setPresetPosition(5);   
-	state=2;
+	Elevator.setPresetPosition(5);
 	autoTimer.reset();
 	DriveTrain.resetEncoders();
+	state=2;
 	}
 	if (state==2&&autoTimer.get()>.5){//if we are in state 2 and we gave it .5 seconds pull forward
 		DriveTrain.enable();	
