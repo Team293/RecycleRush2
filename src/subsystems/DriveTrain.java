@@ -75,7 +75,7 @@ public class DriveTrain {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private static class PIDRobotDrive implements PIDOutput {
 		public void pidWrite(double output) {
-			drive.drive(-0.5, output);	// use pid output to steer
+			drive.drive(-0.2, output);	// use pid output to steer
 		}
 	}
 
@@ -131,13 +131,13 @@ public class DriveTrain {
 		}	
 	}
 	public static int turnleft(){
-		direction=direction+.01;	
+		direction=direction+.005;	
 		count=count+1;
 		return count;
 	}
 	public static double getAvgDistance(){
-		leftencoder =leftEncoder.get();
-		rightencoder=rightEncoder.get();
+		leftencoder =leftEncoder.get()/256*6*Math.PI;  //spread out wheel diameter 6 to make sense
+		rightencoder=rightEncoder.get()/256*6*Math.PI;
 		averageencoder=leftencoder+rightencoder/2;
 		return averageencoder;	
 	}

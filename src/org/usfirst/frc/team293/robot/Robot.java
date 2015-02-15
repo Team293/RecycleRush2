@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 		DriveTrain.gyroInit(); //for straightdrive
+		SensorDriveStraight.init();
 		/*autonomousChooser.addObject("bin set", new BinSet());
 		autonomousChooser.addObject("bin & tote set", new BinToteSet());
 		autonomousChooser.addObject("bin set & tote stack", new BinToteStack());
@@ -56,10 +57,11 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-			SmartDashboard.putNumber("time", Auto.autoTimer.get());
+		
 		//	selectedAuto.run();
-			SensorDriveStraight.blah();
-			
+		//DriveTrain.enable();
+		//DriveTrain.turnleft();
+		SensorDriveStraight.blah();	
 	}
 
 	/**

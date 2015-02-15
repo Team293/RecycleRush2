@@ -1,28 +1,33 @@
 package autonomous;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import subsystems.DriveTrain;
 import subsystems.Elevator;
 
 public class SensorDriveStraight {
 	static int  hi=1;
 	static int state=0;
-	static double distance;	
 	public static Timer autoTimer = new Timer();
 	public static int count;
+	static double distance;
 	public static void init(){
 		autoTimer.start();
+		
 	}
-	public static void blah(){
-			
-	distance=DriveTrain.getDistance();
 	
+	public static void blah(){
+		
+
+		SmartDashboard.putNumber("state", state);
+	distance=DriveTrain.getDistance();
+
 	if(state==0){//I'm moving forward
 		DriveTrain.enable();
 		state=1;
 	}
 	
-	if(state==1&&distance>2){  //stop and pickup can and stuff only calls once
+	if(state==1){  //stop and pickup can and stuff only calls once
 	DriveTrain.disable();
 	Elevator.setPresetPosition(5);   
 	state=2;
@@ -43,6 +48,7 @@ public class SensorDriveStraight {
 	if (state==4&&distance<=50){//we're moving over the bump
 		if (distance==50){
 			Elevator.setPresetPosition(1);
+			state=5;
 		}
 	}
 	
