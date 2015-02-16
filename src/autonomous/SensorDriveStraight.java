@@ -22,11 +22,11 @@ public class SensorDriveStraight {
 		SmartDashboard.putNumber("state", state);
 	distance=DriveTrain.getDistance();
 
-	/*if(state==0){//I'm moving forward
+	if(state==0){//I'm moving forward
 		DriveTrain.enable();
 		state=1;
-	}*/
-	state = 1;
+	}
+	
 	if(state==1){  //stop and pickup can and stuff only calls once
 	DriveTrain.disable();
 	Elevator.setPresetPosition(5);   
