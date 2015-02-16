@@ -16,7 +16,7 @@ public class SensorDriveStraight {
 		
 	}
 	
-	public static void blah(){
+	public static void blah() {
 		
 
 		SmartDashboard.putNumber("state", state);

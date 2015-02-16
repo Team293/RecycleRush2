@@ -5,14 +5,19 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class Auto {
 	
-	Gyro gyro=new Gyro(0);
+	private static int state;
+	private double deltaLeftGyroFB = 0;
+	private double deltaRightGyroFB = 0;
+	private double Kp = .3; // to be determined from testing
 	
-	public void init() {
-		
-	}
 	
-	public void run() {
+	private void angleTracker (Gyro gyro, double desiredAngle) {
+		double error; // angle error between desired and measured
 		
+		error = desiredAngle - gyro.getAngle();
+		
+		deltaRightGyroFB =  error * Kp;
+		deltaLeftGyroFB  = -error * Kp;
 	}
 
 }
