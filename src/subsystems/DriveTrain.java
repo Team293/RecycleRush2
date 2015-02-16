@@ -2,18 +2,16 @@ package subsystems;
 
 import org.usfirst.frc.team293.robot.Ports;
 
-<<<<<<< HEAD
+
 
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
-=======
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
->>>>>>> origin/ImprovedAutonomous
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -25,15 +23,14 @@ public class DriveTrain {
     private static final Encoder leftEncoder = new Encoder(Ports.leftDriveEncoder1, Ports.leftDriveEncoder2);
     private static final Encoder rightEncoder = new Encoder(Ports.rightDriveEncoder1, Ports.rightDriveEncoder2);
     
-<<<<<<< HEAD
-    private static final VictorSP leftMotor = new VictorSP(Ports.leftDrive);
-    private static final VictorSP rightMotor = new VictorSP(Ports.rightDrive);
-=======
+
+    private static final VictorSP leftMotor1 = new VictorSP(Ports.leftDrive);
+    private static final VictorSP rightMotor1 = new VictorSP(Ports.rightDrive);
+
     private static final VictorSP leftMotor = new  VictorSP(Ports.leftDrive);
     private static final  VictorSP rightMotor = new  VictorSP(Ports.rightDrive);
->>>>>>> origin/ImprovedAutonomous
     
-    public static final RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
+    public static final RobotDrive drive = new RobotDrive(leftMotor1, rightMotor1);
     //Underneath is all stuff for Straight drive
     private static Gyro gyro;
 	private static PIDRobotDrive pidRobotDrive;	// this wraps RobotDrive
