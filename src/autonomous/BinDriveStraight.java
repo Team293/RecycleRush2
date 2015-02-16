@@ -21,7 +21,7 @@ public class BinDriveStraight {
 		distance = DriveTrain.getAvgDistance();
 		
 		if (state == 0) {
-			DriveTrain.tankDrive(.2, .2);
+			DriveTrain.tankDrive(.5, .5);
 			state = 1;
 		} 
 		else if (state == 1 && distance > 6) {
@@ -32,12 +32,9 @@ public class BinDriveStraight {
 			DriveTrain.resetEncoders();
 			autoTimer.start();
 			state = 3;
-		} else if (state == 3) {
-			time = autoTimer.get();
-			if (time > 5 /*change based on testing*/) {
-				DriveTrain.stop();
-				Elevator.setPresetPosition(1);
-			}
+		} else if (state == 3 && distance > 120) {
+			DriveTrain.stop();
+			Elevator.setPresetPosition(1);
 		}
 	}
 	
